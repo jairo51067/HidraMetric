@@ -1,0 +1,50 @@
+# HidraMetric
+
+Planificador de hidratación basado en evidencia: calcula la meta diaria de bebida, reparte las tomas durante el día, registra el consumo con un vaso animado y avisa con alarmas. Sitio estático (HTML, CSS y JavaScript sin dependencias ni paso de compilación). Los datos se guardan solo en el dispositivo (`localStorage`).
+
+## Estructura
+```
+index.html              Interfaz (vistas, menú, barra inferior)
+css/styles.css          Estilos (tema claro y oscuro)
+js/app.js               Lógica: cálculos, plan, alarmas, .ics, navegación, PWA
+sw.js                   Service Worker (sin conexión)
+manifest.webmanifest    Metadatos de instalación
+icons/                  Iconos (SVG y PNG, incluido maskable)
+vercel.json             Cabeceras de seguridad y caché
+docs/memoria-prototipo  Trazabilidad del prototipo y base científica
+```
+
+## Ejecutar en local
+Los Service Workers requieren `http://`, no `file://`:
+```bash
+python3 -m http.server 8080   # abre http://localhost:8080
+```
+
+## Publicar en GitHub y Vercel
+```bash
+git init && git add . && git commit -m "HidraMetric v1.0.0"
+git branch -M main
+git remote add origin https://github.com/<usuario>/hidrametric.git
+git push -u origin main
+```
+En Vercel: **Add New → Project →** importar el repositorio. *Framework Preset:* **Other**, sin *Build Command* ni *Output Directory* (raíz del proyecto). Cada `git push` a `main` despliega de nuevo. Al cambiar archivos de la app, incrementa `V` en `sw.js` para renovar la caché de los usuarios.
+
+## Instalación en el celular
+- **Android (Chrome):** menú lateral → *Instalar app*.
+- **iPhone (Safari):** Compartir → *Añadir a pantalla de inicio*.
+
+## Alarmas: qué pueden y qué no
+La alarma dentro de la app (sonido, vibración y notificación) solo funciona con la página abierta. Para avisos con el teléfono bloqueado, usa *Exportar alarmas al calendario (.ics)*. Las notificaciones con la app cerrada requerirían Web Push con un servidor, que esta versión estática no incluye.
+
+## Base científica
+- Meta de agua: máximo entre la ingesta adecuada de agua total de EFSA 2010 (2,5 L hombres, 2,0 L mujeres) y 1 ml por kcal de gasto; ≈80 % proviene de bebidas.
+- BMR: Mifflin–St Jeor (Am J Clin Nutr 1990;51:241-7). TDEE: factores de actividad 1,2 a 1,725.
+- Ajustes: +300 ml embarazo, +700 ml lactancia, +500 ml calor (este último es una estimación prudente, no un valor normativo).
+
+**Estado de verificación:** solo los valores de EFSA se contrastaron con una fuente oficial. El resto de las referencias debe validarse antes de promocionar la app públicamente. Ver `docs/memoria-prototipo/`.
+
+## Aviso
+Herramienta informativa para adultos sanos de 18 años o más; no sustituye el consejo médico. Con enfermedad renal, cardíaca o hepática, o tratamientos que alteren el equilibrio de líquidos, sigue las indicaciones de tu médico.
+
+## Licencia
+Pendiente de definir por el autor.
