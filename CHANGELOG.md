@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 — 2026-10-21
+- Los botones de registro (+250, +300, Otro, Deshacer, Reiniciar) pasan a una barra de acciones con el estilo de la barra inferior.
+- Se añade la licencia MIT.
+
 ## 1.0.0 — 2026-10-21
 - Primera versión oficial: el prototipo v0.3 pasa a proyecto de varios archivos (`index.html`, `css/styles.css`, `js/app.js`).
 - PWA: manifiesto, iconos, Service Worker (funciona sin conexión) y botón "Instalar app".

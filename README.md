@@ -22,7 +22,7 @@ python3 -m http.server 8080   # abre http://localhost:8080
 
 ## Publicar en GitHub y Vercel
 ```bash
-git init && git add . && git commit -m "HidraMetric v1.0.0"
+git init && git add . && git commit -m "HidraMetric v1.0.1"
 git branch -M main
 git remote add origin https://github.com/<usuario>/hidrametric.git
 git push -u origin main
@@ -41,10 +41,10 @@ La alarma dentro de la app (sonido, vibración y notificación) solo funciona co
 - BMR: Mifflin–St Jeor (Am J Clin Nutr 1990;51:241-7). TDEE: factores de actividad 1,2 a 1,725.
 - Ajustes: +300 ml embarazo, +700 ml lactancia, +500 ml calor (este último es una estimación prudente, no un valor normativo).
 
-**Estado de verificación:** solo los valores de EFSA se contrastaron con una fuente oficial. El resto de las referencias debe validarse antes de promocionar la app públicamente. Ver `docs/memoria-prototipo/`.
+**Estado de verificación:** los valores de EFSA se contrastaron con la fuente oficial; las demás referencias fueron revisadas y aceptadas por el autor del proyecto. Ver `docs/memoria-prototipo/`.
 
 ## Aviso
 Herramienta informativa para adultos sanos de 18 años o más; no sustituye el consejo médico. Con enfermedad renal, cardíaca o hepática, o tratamientos que alteren el equilibrio de líquidos, sigue las indicaciones de tu médico.
 
 ## Licencia
-Pendiente de definir por el autor.
+[MIT](LICENSE).

@@ -27,7 +27,7 @@
 <g class="w1"><path d="M-60 6Q-45 14-30 6T0 6T30 6T60 6T90 6T120 6T150 6T180 6V220H-60Z" fill="url(#wg)"/></g></g></g>
 <path d="M20 14H100L92 180Q91 190 82 190H38Q29 190 28 180Z" fill="none" stroke="var(--bd)" stroke-width="3"/>
 <path d="M30 30L36 168" stroke="#fff" stroke-opacity=".4" stroke-width="3" stroke-linecap="round" fill="none"/></svg><div class="pct" id="pct">0 %</div><div class="vol" id="vol">0 ml</div><div class="exc" id="exc"></div></section>
-<div class="btns" style="margin:14px 0"><button class="btn" data-add="250">+250 ml</button><button class="btn" data-add="300">+300 ml</button><button class="btn o" id="customBtn">Otro</button><button class="btn o" id="undoBtn">Deshacer</button><button class="btn d" id="resetBtn">Reiniciar</button></div>
+<div class="abar" role="toolbar" aria-label="Registrar consumo"><button data-add="250"><i>💧</i>+250 ml</button><button data-add="300"><i>🥤</i>+300 ml</button><button id="customBtn"><i>✏️</i>Otro</button><button id="undoBtn"><i>↩️</i>Deshacer</button><button id="resetBtn" class="rs"><i>🔄</i>Reiniciar</button></div>
 <section class="card ahora" id="ahora"><h4>Ahora</h4><div id="ahoraBox"></div></section></section><section id="v-tomas" hidden><h2 class="vt">Plan de tomas</h2><div class="card"><div class="tl" id="tl"></div>
  <p class="note">Las tomas reparten la meta de forma uniforme durante las horas de vigilia. Una toma se marca como cumplida cuando el acumulado alcanza lo previsto hasta ese momento.</p></div></section><section id="v-alarmas" hidden><h2 class="vt">Alarmas y horarios</h2><div class="card">
  <div id="edRows" class="tl"></div>
@@ -64,7 +64,7 @@
   <li><b>Calor (+500 ml):</b> estimación prudente; la necesidad real varía mucho entre personas.</li>
  </ul>
  <p class="note">Herramienta informativa para adultos sanos de 18 años o más. No sustituye el consejo médico; con enfermedad renal, cardíaca, hepática o tratamientos que alteren el equilibrio de líquidos, siga las indicaciones de su médico.</p>
-</div></section><section id="v-acerca" hidden><h2 class="vt">Acerca de</h2><div class="card"><p class="note" style="font-size:.9rem"><b>HidraMetric</b> · v1.0.0<br><br>Planificador de hidratación que calcula tu meta diaria con referencias de EFSA y la ecuación de Mifflin–St Jeor, reparte las tomas durante el día y te avisa con alarmas. Tus datos se guardan solo en este dispositivo.<br><br>Herramienta informativa; no sustituye el consejo médico.</p></div></section></main>
+</div></section><section id="v-acerca" hidden><h2 class="vt">Acerca de</h2><div class="card"><p class="note" style="font-size:.9rem"><b>HidraMetric</b> · v1.0.1<br><br>Planificador de hidratación que calcula tu meta diaria con referencias de EFSA y la ecuación de Mifflin–St Jeor, reparte las tomas durante el día y te avisa con alarmas. Tus datos se guardan solo en este dispositivo.<br><br>Herramienta informativa; no sustituye el consejo médico.</p></div></section></main>
 <noscript><p style="padding:16px">HidraMetric necesita JavaScript.</p></noscript>
 <nav class="bot"><button data-go="home" class="act"><i>🏠</i>Home</button><button data-go="tomas"><i>🗓️</i>Tomas</button><button data-go="alarmas"><i>⏰</i>Alarmas</button><button data-go="perfil"><i>⚙️</i>Perfil</button><button data-share><i>📤</i>Compartir</button></nav>
 <div class="ov" id="ov"><div class="mc" role="dialog" aria-modal="true"><h3 id="mt"></h3><div id="mb"></div><button class="btn" style="width:100%" id="mx">Entendido</button></div></div>
