@@ -121,13 +121,13 @@ function exportIcs(){
  const d=new Date(),ymd=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0'),st=d.toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//HidraMetric//ES','CALSCALE:GREGORIAN'];
  S.forEach(x=>{const k=x.t.replace(':','');L.push('BEGIN:VEVENT','UID:hm-'+k+'-'+ymd+'@hidrametric','DTSTAMP:'+st,'DTSTART:'+ymd+'T'+k+'00','DURATION:PT5M','RRULE:FREQ=DAILY','SUMMARY:💧 Tomar '+x.ml+' ml de agua','BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Hora de hidratarte','TRIGGER:PT0M','END:VALARM','END:VEVENT')});
- L.push('END:VCALENDAR');
+ if(typeof icsExtra==='function')L.push(...icsExtra(ymd,st));L.push('END:VCALENDAR');
  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L.join('\r\n')],{type:'text/calendar;charset=utf-8'}));a.download='hidrametric-alarmas.ics';document.body.appendChild(a);a.click();a.remove()}
 $('icsBtn').onclick=exportIcs;
 
 /* ===== Navegación, menú y compartir ===== */
-const VIEWS=['home','tomas','alarmas','perfil','calorias','base','acerca'];
-function go(v){VIEWS.forEach(x=>$('v-'+x).hidden=x!==v);document.querySelectorAll('nav.bot [data-go]').forEach(b=>b.classList.toggle('act',b.dataset.go===v));$('drawer').classList.remove('on');scrollTo(0,0)}
+const VIEWS=['home','tomas','alarmas','perfil','calorias','base','acerca','libro'];
+function go(v){VIEWS.forEach(x=>$('v-'+x).hidden=x!==v);document.querySelectorAll('nav.bot [data-go]').forEach(b=>b.classList.toggle('act',b.dataset.go===v));$('drawer').classList.remove('on');scrollTo(0,0);if(typeof onView==='function')onView(v)}
 $('menuBtn').onclick=()=>$('drawer').classList.add('on');$('scrim').onclick=()=>$('drawer').classList.remove('on');
 document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)go(g.dataset.go);if(e.target.closest('[data-share]')){$('drawer').classList.remove('on');compartir()}});
 async function compartir(){const d={title:'HidraMetric',text:'HidraMetric: planificador de hidratación basado en evidencia.',url:location.href};

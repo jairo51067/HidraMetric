@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1 — 2026-10-23
+- Portada del libro: corregido el diseño que se mostraba en columnas y cortaba el texto; ahora es una portada centrada con icono y adorno.
+
+## 1.1.0 — 2026-10-22
+- Consejos de hidratación aleatorios entre tomas (aviso en la app, notificación y eventos en el `.ics`), con frecuencia configurable.
+- Libro didáctico "Beneficios de hidratarte" con índice, páginas, progreso y deslizamiento; tarjeta diaria en Inicio y enlaces desde cada consejo.
+- Contenido en `data/*.json`; matices de redacción en afirmaciones con evidencia limitada (originales en `docs/fuentes-originales/`).
+
 ## 1.0.1 — 2026-10-21
 - Los botones de registro (+250, +300, Otro, Deshacer, Reiniciar) pasan a una barra de acciones con el estilo de la barra inferior.
 - Se añade la licencia MIT.

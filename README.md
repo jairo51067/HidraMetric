@@ -7,11 +7,15 @@ Planificador de hidratación basado en evidencia: calcula la meta diaria de bebi
 index.html              Interfaz (vistas, menú, barra inferior)
 css/styles.css          Estilos (tema claro y oscuro)
 js/app.js               Lógica: cálculos, plan, alarmas, .ics, navegación, PWA
+js/libro.js             Libro didáctico de beneficios (lectura por páginas, progreso)
+js/avisos.js            Consejos aleatorios entre tomas (aviso, notificación, .ics)
+data/                   Contenido editable: beneficios y consejos (JSON)
 sw.js                   Service Worker (sin conexión)
 manifest.webmanifest    Metadatos de instalación
 icons/                  Iconos (SVG y PNG, incluido maskable)
 vercel.json             Cabeceras de seguridad y caché
 docs/memoria-prototipo  Trazabilidad del prototipo y base científica
+docs/fuentes-originales JSON originales, antes de los ajustes de redacción
 ```
 
 ## Ejecutar en local
@@ -22,7 +26,7 @@ python3 -m http.server 8080   # abre http://localhost:8080
 
 ## Publicar en GitHub y Vercel
 ```bash
-git init && git add . && git commit -m "HidraMetric v1.0.1"
+git init && git add . && git commit -m "HidraMetric v1.1.0"
 git branch -M main
 git remote add origin https://github.com/<usuario>/hidrametric.git
 git push -u origin main
@@ -32,6 +36,12 @@ En Vercel: **Add New → Project →** importar el repositorio. *Framework Prese
 ## Instalación en el celular
 - **Android (Chrome):** menú lateral → *Instalar app*.
 - **iPhone (Safari):** Compartir → *Añadir a pantalla de inicio*.
+
+## Consejos y libro de beneficios
+- **Consejos:** mensajes breves de `data/notificaciones_hidratacion.json`, al azar y sin repetirse hasta haber salido todos. Se programan en el punto medio entre tomas consecutivas, dentro del horario de despertar y dormir y nunca después de la última toma. Frecuencia: desactivados, 3 al día (por defecto) o uno entre cada toma.
+- **Cómo llegan:** con la app abierta, como aviso discreto con enlace al libro; en segundo plano, como notificación del sistema si se concede el permiso; y por calendario, porque el `.ics` puede incluir 14 días de consejos. No son notificaciones push de servidor: con la app cerrada el navegador no garantiza su entrega.
+- **Libro:** *Beneficios de hidratarte* (menú lateral) presenta `data/beneficios_hidratacion.json` como libro de lectura por páginas, con índice, progreso y continuar donde se dejó. Para llevar al usuario hasta allí: tarjeta "Sabías que…" diaria en Inicio, etiqueta NUEVO en el menú y enlace "Leer más" en cada consejo.
+- **Editar contenido:** basta cambiar los JSON de `data/`. En `docs/fuentes-originales/` quedan los textos originales; en los de `data/` se matizó la redacción de afirmaciones con evidencia limitada o mecanismos solo hipotéticos.
 
 ## Alarmas: qué pueden y qué no
 La alarma dentro de la app (sonido, vibración y notificación) solo funciona con la página abierta. Para avisos con el teléfono bloqueado, usa *Exportar alarmas al calendario (.ics)*. Las notificaciones con la app cerrada requerirían Web Push con un servidor, que esta versión estática no incluye.
