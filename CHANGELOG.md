@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 — 2026-10-24
+- Corregido: al cambiar un dato del perfil no se actualizaban BMR, TDEE ni meta. Desde la v1.1.0 una función del libro (`leer`) reemplazaba por error a la que lee el perfil.
+- Nueva imagen principal: botella blanca sobre fondo azul con marcadores de lo consumido y de la meta prevista a la hora actual, mensaje de ánimo y panel "Faltan / Meta".
+- Aviso en Alarmas cuando se usa un plan personalizado (la meta cambia pero las tomas no hasta restablecer).
+
 ## 1.1.1 — 2026-10-23
 - Portada del libro: corregido el diseño que se mostraba en columnas y cortaba el texto; ahora es una portada centrada con icono y adorno.
 

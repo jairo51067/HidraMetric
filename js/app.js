@@ -46,16 +46,26 @@ $('resetBtn').onclick=()=>modal('Reiniciar consumo','Se borrarán los registros 
 document.addEventListener('click',e=>{if(e.target.id==='rok'){log.items=[];save();$('ov').classList.remove('on');render()}});
 $('moreBtn').onclick=()=>{const p=meta?total()/meta:0;modal(p>1.15?'Alerta de sobrehidratación':'Meta superada','Superar la meta no aporta beneficio adicional demostrado en personas sanas; la sed es una guía fiable para ajustar el resto del día. Por encima del 115 % se recomienda detener la ingesta de líquidos.')};
 
+/* Ml que el plan prevé haber bebido hasta este momento (marcador derecho de la botella). */
+function esperado(){
+ if(!perfil||!meta)return 0;
+ const n=new Date(),mn=n.getHours()*60+n.getMinutes();let c=0;
+ slots().forEach(x=>{if(mins(x.t)<=mn)c+=x.ml});return Math.min(c,meta)}
+const MSG=[[25,'Empieza con un vaso de agua 💧'],[50,'Buen comienzo, ¡sigue así!'],[75,'¡Vas muy bien!']];
 function render(){
- const ml=total(),pct=meta?Math.round(ml/meta*100):0,ratio=meta?Math.min(ml/meta,1.2):0;
+ const ml=total(),pct=meta?Math.round(ml/meta*100):0,r1=meta?Math.min(ml/meta,1):0,Y=v=>'translateY('+(284-236*v)+'px)',n=new Date(),ex=esperado();
  $('pct').textContent=pct+' %';$('vol').textContent=ml+' ml / '+(meta||'–')+' ml';
- $('wv').style.transform='translateY('+(190-176*Math.min(ratio,1))+'px)';
- let c1='var(--w1)',c2='var(--w2)',bn='',cls='';
- if(meta&&ml>meta*1.15){c1='rgba(239,68,68,.8)';c2='rgba(220,38,38,.95)';cls='bad';bn='Exceso superior al 115 % de la meta.'}
- else if(meta&&ml>meta){c1='rgba(245,158,11,.8)';c2='rgba(217,119,6,.95)';cls='warn';bn='Meta diaria superada.'}
- else if(meta&&ml===meta){c1=c2='#10b981'}
- $('s1').setAttribute('stop-color',c1);$('s2').setAttribute('stop-color',c2);
- $('exc').textContent=meta&&ml>meta?'Exceso: +'+(ml-meta)+' ml ('+((ml-meta)/1000).toFixed(2)+' L)':'';
+ $('wv').style.transform=Y(r1);$('mkL').style.transform=Y(r1);$('mkR').style.transform=Y(meta?ex/meta:0);
+ $('mkLv').textContent=ml+' ml';$('mkRv').textContent=ex+' ml';
+ $('mkRt').textContent='META A LAS '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
+ $('stLeft').textContent=meta?Math.max(meta-ml,0):'–';$('stGoal').textContent=meta||'–';
+ let c1='#ffffff',c2='#e0f2fe',bn='',cls='',m=(MSG.find(x=>pct<x[0])||[0,'¡Casi llegas a tu meta!'])[1];
+ if(!meta)m='Completa tu perfil para calcular tu meta';
+ else if(ml>meta*1.15){c1='#fecaca';c2='#fca5a5';cls='bad';bn='Exceso superior al 115 % de la meta.';m='Superaste tu meta: detén la ingesta de líquidos'}
+ else if(ml>meta){c1='#fde68a';c2='#fcd34d';cls='warn';bn='Meta diaria superada.';m='Meta superada: no necesitas beber más'}
+ else if(ml===meta){c1='#bbf7d0';c2='#86efac';m='¡Meta cumplida! 🎉'}
+ $('s1').setAttribute('stop-color',c1);$('s2').setAttribute('stop-color',c2);$('msg').textContent=m;
+ $('exc').textContent=meta&&ml>meta?'Exceso: +'+(ml-meta)+' ml':'';
  const b=$('banner');b.className='banner'+(cls?' on '+cls:'');$('bannerTxt').textContent=bn;
  timeline()}
 
@@ -88,6 +98,7 @@ function timeline(){
 
 /* ===== Editor de horarios ===== */
 function renderEditor(){
+ $('cnote').hidden=!(custom&&custom.length);
  const S=custom&&custom.length?custom:autoSlots();
  $('edRows').innerHTML=S.map((x,i)=>'<div class="ti" style="gap:6px"><input type="checkbox" data-i="'+i+'" data-f="on" style="width:auto" '+(x.on?'checked':'')+' aria-label="Alarma activa"><input type="time" data-i="'+i+'" data-f="t" value="'+x.t+'" style="width:110px"><input type="number" data-i="'+i+'" data-f="ml" value="'+x.ml+'" min="50" max="1000" step="10" style="width:80px"><span class="m" style="font-size:.7rem;color:var(--tx2)">ml</span><button class="btn o" data-del="'+i+'" style="padding:6px 10px" aria-label="Quitar toma">✕</button></div>').join('')}
 $('edRows').addEventListener('input',e=>{const f=e.target.dataset.f;if(!f)return;ensureCustom();const x=custom[+e.target.dataset.i];
@@ -142,7 +153,7 @@ function reloj(){const n=new Date();let h=n.getHours();const ap=h>=12?'PM':'AM';
 
 ['sexo','edad','estatura','peso','act','clima','estado','desp','dorm'].forEach(k=>$(k).addEventListener('input',calcular));
 $('sexo').addEventListener('change',()=>{if($('sexo').value==='h')$('estado').value='0'});
-load();calcular();reloj();setInterval(reloj,1000);setInterval(timeline,60000);setInterval(alarmas,15000);
+load();calcular();reloj();setInterval(reloj,1000);setInterval(render,60000);setInterval(alarmas,15000);
 
 /* ===== PWA: instalación y modo sin conexión ===== */
 let dip=null;

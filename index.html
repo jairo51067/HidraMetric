@@ -18,19 +18,23 @@
 <header class="top"><button class="ico" id="menuBtn" aria-label="Menú">☰</button><h1>HidraMetric</h1><div class="clock" id="clock">--:--:--</div><button class="ico" id="themeBtn" aria-label="Cambiar tema">🌙</button></header>
 <div id="drawer"><div class="pn"><h3>💧 HidraMetric</h3>
 <button class="di" data-go="home">🏠 Inicio</button><button class="di" data-go="tomas">🗓️ Plan de tomas</button><button class="di" data-go="alarmas">⏰ Alarmas y horarios</button><button class="di" data-go="perfil">⚙️ Perfil y requerimiento</button><button class="di" data-go="calorias">🔥 Calorías y gasto</button><button class="di" data-go="libro">📖 Beneficios de hidratarte <span class="nw" id="nwDot" hidden>NUEVO</span></button><button class="di" data-go="base">🔬 Base científica</button><button class="di" data-share>📤 Compartir app</button><button class="di" id="installBtn" hidden>📲 Instalar app</button><button class="di" data-go="acerca">ℹ️ Acerca de</button></div><div class="sc" id="scrim"></div></div>
-<main class="app"><section id="v-home"><div class="banner" id="banner" role="alert"><span id="bannerTxt"></span><button class="btn o" style="padding:4px 8px;font-size:.75rem" id="moreBtn">Saber más</button></div><section class="card hero"><svg id="glass" viewBox="0 0 120 200" role="img" aria-label="Vaso de agua que se llena">
-<defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop id="s1" offset="0" stop-color="var(--w1)"/><stop id="s2" offset="1" stop-color="var(--w2)"/></linearGradient>
-<clipPath id="gc"><path d="M20 14H100L92 180Q91 190 82 190H38Q29 190 28 180Z"/></clipPath></defs>
-<path d="M20 14H100L92 180Q91 190 82 190H38Q29 190 28 180Z" fill="var(--acc)" opacity=".6"/>
-<g clip-path="url(#gc)"><g id="wv" style="transform:translateY(190px);transition:transform .9s cubic-bezier(.4,0,.2,1)">
-<g class="w2"><path d="M-60 8Q-45 0-30 8T0 8T30 8T60 8T90 8T120 8T150 8T180 8V220H-60Z" fill="url(#wg)" opacity=".5"/></g>
-<g class="w1"><path d="M-60 6Q-45 14-30 6T0 6T30 6T60 6T90 6T120 6T150 6T180 6V220H-60Z" fill="url(#wg)"/></g></g></g>
-<path d="M20 14H100L92 180Q91 190 82 190H38Q29 190 28 180Z" fill="none" stroke="var(--bd)" stroke-width="3"/>
-<path d="M30 30L36 168" stroke="#fff" stroke-opacity=".4" stroke-width="3" stroke-linecap="round" fill="none"/></svg><div class="pct" id="pct">0 %</div><div class="vol" id="vol">0 ml</div><div class="exc" id="exc"></div></section>
+<main class="app"><section id="v-home"><div class="banner" id="banner" role="alert"><span id="bannerTxt"></span><button class="btn o" style="padding:4px 8px;font-size:.75rem" id="moreBtn">Saber más</button></div><section class="card hero"><div class="hb">
+<svg id="bottle" viewBox="0 0 360 310" role="img" aria-label="Botella que se llena con tu consumo de agua">
+<defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop id="s1" offset="0" stop-color="#ffffff"/><stop id="s2" offset="1" stop-color="#e0f2fe"/></linearGradient><clipPath id="bc"><path d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z"/></clipPath></defs>
+<path d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z" fill="rgba(255,255,255,.14)"/>
+<g clip-path="url(#bc)"><g id="wv" style="transform:translateY(284px);transition:transform .9s cubic-bezier(.4,0,.2,1)"><g class="w2"><path d="M-60 8Q-45 0-30 8T0 8T30 8T60 8T90 8T120 8T150 8T180 8T210 8T240 8T270 8V330H-60Z" fill="url(#wg)" opacity=".55"/></g><g class="w1"><path d="M-60 6Q-45 14-30 6T0 6T30 6T60 6T90 6T120 6T150 6T180 6T210 6T240 6T270 6V330H-60Z" fill="url(#wg)"/></g></g></g>
+<path d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+<rect x="160" y="6" width="40" height="22" rx="5" fill="#fff"/>
+<g id="mkL" style="transform:translateY(284px);transition:transform .9s cubic-bezier(.4,0,.2,1)"><line x1="8" y1="0" x2="128" y2="0" stroke="#fff" stroke-opacity=".85"/><text id="mkLv" x="8" y="-8" fill="#fff" font-size="26" font-weight="700">0 ml</text><text x="8" y="16" fill="#fff" fill-opacity=".8" font-size="11" letter-spacing="1">CONSUMIDO</text></g>
+<g id="mkR" style="transform:translateY(284px);transition:transform .9s cubic-bezier(.4,0,.2,1)"><line x1="232" y1="0" x2="352" y2="0" stroke="#fff" stroke-opacity=".85"/><text id="mkRv" x="352" y="-8" text-anchor="end" fill="#fff" font-size="26" font-weight="700">0 ml</text><text id="mkRt" x="352" y="16" text-anchor="end" fill="#fff" fill-opacity=".8" font-size="11" letter-spacing="1">META A LAS --:--</text></g>
+</svg>
+<div class="pct" id="pct">0 %</div><div class="vol" id="vol">0 ml</div><div class="exc" id="exc"></div><div class="msg" id="msg"></div></div>
+<div class="stats"><div><small>Faltan</small><span><b id="stLeft">–</b> ml</span></div><div><small>Meta</small><span><b id="stGoal">–</b> ml</span></div></div></section>
 <div class="abar" role="toolbar" aria-label="Registrar consumo"><button data-add="250"><i>💧</i>+250 ml</button><button data-add="300"><i>🥤</i>+300 ml</button><button id="customBtn"><i>✏️</i>Otro</button><button id="undoBtn"><i>↩️</i>Deshacer</button><button id="resetBtn" class="rs"><i>🔄</i>Reiniciar</button></div>
 <section class="card ahora" id="ahora"><h4>Ahora</h4><div id="ahoraBox"></div></section>
 <section class="card teaser" id="teaser" hidden></section></section><section id="v-tomas" hidden><h2 class="vt">Plan de tomas</h2><div class="card"><div class="tl" id="tl"></div>
  <p class="note">Las tomas reparten la meta de forma uniforme durante las horas de vigilia. Una toma se marca como cumplida cuando el acumulado alcanza lo previsto hasta ese momento.</p></div></section><section id="v-alarmas" hidden><h2 class="vt">Alarmas y horarios</h2><div class="card">
+ <p class="note" id="cnote" hidden>Estás usando un plan personalizado: si cambias tu perfil, la meta se actualiza pero tus tomas no. Pulsa «Restablecer automático» para recalcularlas.</p>
  <div id="edRows" class="tl"></div>
  <div class="btns" style="margin-top:12px"><button class="btn o" id="addSlot">+ Toma</button><button class="btn o" id="autoSlots">Restablecer automático</button></div>
  <div class="fg" style="margin-top:14px"><label style="display:flex;gap:8px;align-items:center;text-transform:none;font-size:.8rem"><input type="checkbox" id="alOn" style="width:auto"> Alarma con la app abierta (sonido, vibración y aviso)</label></div>
@@ -72,7 +76,7 @@
  </ul>
  <p class="note">Herramienta informativa para adultos sanos de 18 años o más. No sustituye el consejo médico; con enfermedad renal, cardíaca, hepática o tratamientos que alteren el equilibrio de líquidos, siga las indicaciones de su médico.</p>
 </div></section><section id="v-libro" hidden><div id="libroBox"></div></section>
-<section id="v-acerca" hidden><h2 class="vt">Acerca de</h2><div class="card"><p class="note" style="font-size:.9rem"><b>HidraMetric</b> · v1.1.1<br><br>Planificador de hidratación que calcula tu meta diaria con referencias de EFSA y la ecuación de Mifflin–St Jeor, reparte las tomas durante el día y te avisa con alarmas. Tus datos se guardan solo en este dispositivo.<br><br>Herramienta informativa; no sustituye el consejo médico.</p></div></section></main>
+<section id="v-acerca" hidden><h2 class="vt">Acerca de</h2><div class="card"><p class="note" style="font-size:.9rem"><b>HidraMetric</b> · v1.2.0<br><br>Planificador de hidratación que calcula tu meta diaria con referencias de EFSA y la ecuación de Mifflin–St Jeor, reparte las tomas durante el día y te avisa con alarmas. Tus datos se guardan solo en este dispositivo.<br><br>Herramienta informativa; no sustituye el consejo médico.</p></div></section></main>
 <noscript><p style="padding:16px">HidraMetric necesita JavaScript.</p></noscript>
 <div class="toast" id="toast" hidden role="status"></div>
 <nav class="bot"><button data-go="home" class="act"><i>🏠</i>Home</button><button data-go="tomas"><i>🗓️</i>Tomas</button><button data-go="alarmas"><i>⏰</i>Alarmas</button><button data-go="perfil"><i>⚙️</i>Perfil</button><button data-share><i>📤</i>Compartir</button></nav>

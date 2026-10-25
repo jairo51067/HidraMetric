@@ -123,3 +123,14 @@ nav.bot button.act{color:var(--tx)}nav.bot button.act i{background:var(--acc)}
 .cover h2{font-size:1.5rem}
 .cover .btn{width:100%;font-family:system-ui,sans-serif}
 .libro .prog{text-align:center}
+/* Botella principal */
+.hero{padding:0;overflow:hidden;gap:0;border:0;color:#fff;background:linear-gradient(165deg,#0a58ca,#0284c7 50%,#38bdf8)}
+[data-theme=dark] .hero{background:linear-gradient(165deg,#07163f,#0b3b8f 55%,#0369a1)}
+.hb{padding:16px 12px 12px;display:flex;flex-direction:column;align-items:center;gap:2px;width:100%}
+#bottle{width:100%;max-width:420px;height:auto;filter:drop-shadow(0 8px 16px rgba(0,0,0,.25))}
+.hero .pct{color:#fff;font-size:1.8rem}.hero .vol{color:rgba(255,255,255,.85)}.hero .exc{color:#fde68a}
+.msg{font-weight:800;font-size:.95rem;margin-top:6px;text-align:center}
+.stats{display:flex;width:100%;background:var(--bg)}
+.stats>div{flex:1;text-align:center;padding:14px 8px}.stats>div+div{border-left:1px solid var(--bd)}
+.stats small{display:block;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--tx2)}
+.stats b{font-size:2.1rem;font-weight:900;color:var(--neon)}.stats span{font-size:.9rem;font-weight:700;color:var(--tx2)}

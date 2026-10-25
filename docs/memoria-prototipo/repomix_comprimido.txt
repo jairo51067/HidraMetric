@@ -1,0 +1,78 @@
+file merged representation codebase combined into single document by Repomix. 
+ content processed comments removed empty lines removed line numbers added content formatted for parsing in markdown style compressed code blocks separated by. 
+ File Summary 
+ Purpose 
+ packed representation repository contents. 
+ consumable by AI systems for analysis code review 
+. 
+ File Format 
+ content organized 
+. summary section 
+. Repository information 
+. Directory structure 
+. Repository files if enabled 
+. Multiple file entries 
+. header with file path 
+. full contents in code block 
+ Usage Guidelines 
+ read - only. changes to 
+ original repository files not packed version. 
+ to distinguish 
+ between files. 
+ contain sensitive information. 
+ security. 
+ Some files excluded based on. gitignore rules Repomix configuration 
+ Binary files not included in packed representation. Repository Structure section for complete list of file paths binary files 
+ Files matching patterns. 
+ Code comments removed from supported file types 
+ Empty lines removed from 
+ Line numbers added to beginning each line 
+ Content formatted for parsing in markdown style 
+ Content compressed code blocks separated by delimiter 
+ Files sorted by Git change count 
+ Directory Structure 
+memoria prototipo 
+ app hidratacion base cientifica. md 
+ app hidratacion trazabilidad. 
+ hidratacion. 
+ memoria prototipo app hidratacion base cientifica. 
+ app hidratacion base cientifica 
+ Fórmulas fuentes HidraMetric EFSA 2010 ritmo máximo ingesta. 
+ fórmulas hidrametric 
+ datos reales fórmulas comprobadas validados 
+ meta bebida máximo ingesta agua 2010 2, 5 L hombres 2, 0 L mujeres 1 ml por kcal gasto TDEE multiplicado por 0, 8 ≈80 % ajustes 50 ml 
+ BMR Mifflin Jeor 10 peso + 6, 25 estatura 5 edad + 5 hombres −161 mujeres TDEE factores 1, 2 / 1, 375 55 725 
+ ajustes 300 ml embarazo 700 ml lactancia 500 ml ambiente cálido 
+ seguridad adultos 18 a 100 años 1 L capacidad renal 0, 8 a 1 L / h alerta sobrehidratación 115 % meta no sustituye consejo médico 
+ referencias EFSA Journal 2010 8 ( 3 ) : 1459 Mifflin.Am J Clin Nutr 1990 51 : 241 - 7 NRC 1989 1 ml / kcal IOM 2005 consenso hiponatremia ejercicio Clin J Sport Med 2015 
+ estado verificación valores EFSA contrastaron con búsqueda web resto citó memoria validarse antes publicar versión oficial 
+ 2026 - 10 - 21 usuario confía referencias considera ideales README revisadas aceptadas EFSA contrastó con fuente oficial 
+ memoria prototipo app - hidratacion - trazabilidad. 
+ Bitácora de HidraMetric ( v0. 1 a v1. 1. 1, oct - 2026 prototipo Vercel licencia MIT consejos. 
+ sources 
+ 2026 - 10 - 21 v0. 1 partió repomix _ comprimido. txt, reconstruyó reescribió como HidraMetric único HTML 
+ v0. 1 reloj mostraba 0 a las 12 PM quitó Service Worker Blob eliminó consejo sobre filtración glomerular matutina " no tener respaldo 
+ v0.perfil plan base científica desplegables nivel hidratación protagonista botón Reiniciar no respondía confirm reemplazó modal 
+ v0. alarmas aprobadas editor horarios alarma app abierta sonido vibración notificación exportación. ics alarma diaria limitación app abierta vía calendario 
+ v0. 3 rediseño captura Inicio vaso animado barra superior menú título tema inferior menú lateral Calorías Base científica compartir Web Share 
+ hidrametric. html ~ 31 KB archivo datos guardados localStorage clave hidrametric. v2 
+ ideas no historial semanal rachas logros recordatorios clima déficit superávit calórico 
+ termina etapa prototipo código oficial GitHub despliegue Vercel 
+ estructura index. html styles. css app. js README manifiesto PWA 
+ 2026 - 10 - 21 v1. 0. 0 inicia fase oficial proyecto varios archivos index. html styles. app. sw. manifest. webmanifest icons vercel. json README CHANGELOG docs memoria prototipo hidrametric - app.zip para GitHub Vercel añadió PWA instalable sin conexión cabeceras de seguridad licencia definir 
+ - 2026 - 10 - 21 HidraMetric v1. 0. 0 desplegada en Vercel. 
+. 0. 1 licencia MIT pidió pasar botones de registro a barra de acciones tab bar entregado en hidrametric - app. zip actualizado 
+ 2026 - 10 - 21 v1. 1. 0 curso pidió notificaciones aleatorias contenido hidratacion. json programadas toma sección en menú hamburguesa beneficios _ hidratacion. json libro didáctico migas de pan 
+ v1. 1. 0 entregada en hidrametric - app. zip libro didáctico. índice páginas progreso consejos entre tomas avisos. 3 día. días contenido en data. json no push servidor app cerrada no garantiza entrega matizó redacción afirmaciones evidencia limitada originales docs 
+ - 2026 - 10 - 23 v1. 1.usuario compartió captura portada libro de beneficios en columnas con texto cortado fila corrigió con portada centrada con icono adorno entregado en hidrametric - app. zip 
+ memoria - prototipo app - hidratacion. 
+ Proyecto HidraMetric antes AQUANÖMIC app web de hidratación v1. 1. 1 en Vercel. licencia MIT trazabilidad. 
+. 
+ proyecto App _ de hidratacion inteligente prototipo nivel superior premium / senior información validada fórmulas comprobadas datos respaldados 
+ evaluar nombre app adaptado profesionalmente, contenido 
+ formato de salida pedido código mejorado único archivo 
+ restricciones usar solo contenido adjunto. no suponer archivos inexistentes no cambiar comportamiento 
+ app HidraMetric ( archivo hidrametric. html perfil plan base científica desplegables nivel de hidratación del día 
+ active alarmas horas plan horarios personalizables 
+ aprobó implementar alarmas en app horarios editables aviso en pantalla exportación de alarmas a calendario.termina etapa prototipo código GitHub Vercel 
+ 2026 - 10 - 21 prototipo v0. 3 hidrametric. html vaso animado barras superior inferior menú lateral alarmas exportación. detalle app - hidratacion trazabilidad base cientifica 

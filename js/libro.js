@@ -13,7 +13,7 @@ function indice(){
  C.map((c,i)=>'<li><button data-cap="'+c.id+'" data-p="0"><b>'+ROM[i]+'</b><span>'+c.icono+' '+esc(c.titulo)+'</span><em>'+c.puntos.length+' pág.'+(capDone(c)?' ✓':'')+'</em></button></li>').join('')+
  '<li><button data-cap="epilogo"><b>✦</b><span>Epílogo</span><em>Conclusión</em></button></li></ol></article>';
 }
-function leer(id,p){
+function leerPag(id,p){
  const C=LIB.categorias,ci=C.findIndex(c=>c.id===id);if(ci<0)return indice();
  const c=C[ci],n=c.puntos.length;p=Math.max(0,Math.min(p,n));cur=id;LP.last={c:id,p};
  if(p<n){const v=LP.v[id]=LP.v[id]||[];if(!v.includes(p))v.push(p)}lpSave();
@@ -33,7 +33,7 @@ function epilogo(){
 function abrirLibro(id,p){
  go('libro');
  if(!LIB){pend=[id,p];$('libroBox').innerHTML='<p class="note" style="padding:20px">Cargando el libro…</p>';return}
- if(id==='epilogo')epilogo();else if(id)leer(id,p||0);else indice();
+ if(id==='epilogo')epilogo();else if(id)leerPag(id,p||0);else indice();
 }
 function teaser(){
  const el=$('teaser');if(!LIB)return;const all=[];LIB.categorias.forEach(c=>c.puntos.forEach((t,i)=>all.push([c,i,t])));
@@ -50,10 +50,10 @@ function ruta(){
 }
 $('teaser').addEventListener('click',e=>abrirLibro(e.currentTarget.dataset.cap,+e.currentTarget.dataset.pp));
 $('libroBox').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
- if(d.cap==='epilogo')return epilogo();if(d.cap)return leer(d.cap,+d.p||0);if(d.p!==undefined)return leer(cur,+d.p);if(d.idx!==undefined)indice()});
+ if(d.cap==='epilogo')return epilogo();if(d.cap)return leerPag(d.cap,+d.p||0);if(d.p!==undefined)return leerPag(cur,+d.p);if(d.idx!==undefined)indice()});
 $('libroBox').addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
-$('libroBox').addEventListener('touchend',e=>{if(tx===null||!cur||!LP.last)return;const dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>70)leer(cur,LP.last.p+(dx<0?1:-1))});
-document.addEventListener('keydown',e=>{if($('v-libro').hidden||!cur||!LP.last)return;if(e.key==='ArrowRight')leer(cur,LP.last.p+1);if(e.key==='ArrowLeft')leer(cur,LP.last.p-1)});
+$('libroBox').addEventListener('touchend',e=>{if(tx===null||!cur||!LP.last)return;const dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>70)leerPag(cur,LP.last.p+(dx<0?1:-1))});
+document.addEventListener('keydown',e=>{if($('v-libro').hidden||!cur||!LP.last)return;if(e.key==='ArrowRight')leerPag(cur,LP.last.p+1);if(e.key==='ArrowLeft')leerPag(cur,LP.last.p-1)});
 addEventListener('hashchange',ruta);
 if('serviceWorker'in navigator)navigator.serviceWorker.addEventListener('message',e=>{const u=e.data&&e.data.go;if(u){const h=u.split('#')[1]||'';if(location.hash==='#'+h)ruta();else location.hash=h}});
 fetch('data/beneficios_hidratacion.json').then(r=>r.json()).then(j=>{LIB=j;$('nwDot').hidden=LP.seen;teaser();if(pend){const q=pend;pend=null;abrirLibro(q[0],q[1])}}).catch(()=>{});
