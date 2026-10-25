@@ -30,17 +30,19 @@ function calcular(){
  $('desglose').textContent='Agua total de referencia: '+(agua/1000).toFixed(2)+' L ('+(agua===ai?'EFSA AI':'1 ml/kcal')+') · de bebidas ≈80 % = '+Math.round(agua*.8)+' ml'+(extra?' · ajustes +'+extra+' ml':'')+'.';
  save();renderEditor();renderCal();render()}
 
-function total(){return log.items.reduce((s,i)=>s+i.ml,0)}
-function add(ml){
+/* Tipos de bebida: [nombre, icono, suma a la meta (1) o solo se registra (0)] */
+const TIPOS={agua:['Agua','💧',1],te:['Té','🍵',1],cafe:['Café','☕',1],gas:['Agua con gas','💦',1],jugo:['Jugo','🍊',1],leche:['Leche','🥛',1],coco:['Agua de coco','🥥',1],dep:['Bebida deportiva','⚡',1],refresco:['Refresco','🥤',1],alcohol:['Alcohol','🍷',0],sopa:['Sopa o caldo','🍲',0]};
+const cuenta=i=>(TIPOS[i.tipo||'agua']||[0,0,1])[2]===1;
+function total(){return log.items.filter(cuenta).reduce((s,i)=>s+i.ml,0)}
+function add(ml,tipo,ts){
  if(!perfil){modal('Perfil incompleto','Corrija los datos del perfil antes de registrar.');return}
  if(log.fecha!==hoy())log={fecha:hoy(),items:[]};
- const now=Date.now(),rec=log.items.filter(i=>now-i.t<36e5).reduce((s,i)=>s+i.ml,0)+ml;
- log.items.push({t:now,ml});save();render();
+ const it={t:ts||Date.now(),ml,tipo:tipo||'agua'},now=Date.now(),rec=log.items.filter(i=>cuenta(i)&&now-i.t<36e5).reduce((s,i)=>s+i.ml,0)+(cuenta(it)?ml:0);
+ log.items.push(it);save();render();
+ if(!cuenta(it))return;
  if(rec>1000)modal('Ritmo de ingesta elevado','Ha registrado '+rec+' ml en la última hora. La capacidad renal de excretar agua es de orientativamente 0,8–1 L/h; superarla de forma sostenida aumenta el riesgo de hiponatremia dilucional. Espaciar las tomas.');
  else if(total()>meta*1.15)modal('Alerta de sobrehidratación','Ha superado el 115 % de su meta ('+(total()-meta)+' ml de exceso). La ingesta excesiva de líquidos puede diluir el sodio en sangre (hiponatremia) y sobrecargar la función renal. Detenga el consumo de líquidos; si hay náuseas, dolor de cabeza intenso o confusión, busque atención médica.')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(b){if(b.id==='alReg')$('ov').classList.remove('on');add(+b.dataset.add)}});
-$('customBtn').onclick=()=>modal('Registro personalizado','Volumen en ml (1–1500)<br><br><input id="ci" type="number" min="1" max="1500" value="150"><br><br><button class="btn" style="width:100%" id="cok">Añadir</button>');
-document.addEventListener('click',e=>{if(e.target.id==='cok'){const v=Math.round(parseFloat($('ci').value));if(v>=1&&v<=1500){$('ov').classList.remove('on');add(v)}else $('ci').classList.add('err')}});
 $('undoBtn').onclick=()=>{log.items.pop();save();render()};
 $('resetBtn').onclick=()=>modal('Reiniciar consumo','Se borrarán los registros de hoy ('+total()+' ml). Esta acción no se puede deshacer.<br><br><button class="btn d" style="width:100%" id="rok">Sí, reiniciar</button>','Cancelar');
 document.addEventListener('click',e=>{if(e.target.id==='rok'){log.items=[];save();$('ov').classList.remove('on');render()}});
@@ -67,7 +69,7 @@ function render(){
  $('s1').setAttribute('stop-color',c1);$('s2').setAttribute('stop-color',c2);$('msg').textContent=m;
  $('exc').textContent=meta&&ml>meta?'Exceso: +'+(ml-meta)+' ml':'';
  const b=$('banner');b.className='banner'+(cls?' on '+cls:'');$('bannerTxt').textContent=bn;
- timeline()}
+ if(typeof renderHoy==='function')renderHoy();timeline()}
 
 /* ===== Plan de tomas (automático o personalizado) ===== */
 const mins=t=>{const [h,m]=t.split(':');return +h*60+ +m};

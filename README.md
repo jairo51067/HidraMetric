@@ -37,6 +37,9 @@ En Vercel: **Add New → Project →** importar el repositorio. *Framework Prese
 - **Android (Chrome):** menú lateral → *Instalar app*.
 - **iPhone (Safari):** Compartir → *Añadir a pantalla de inicio*.
 
+## Registro de bebidas
+Botón **Bebidas** de Inicio: elige el tipo, el volumen (teclado o atajos 150/250/330/500 ml) y la hora (hoy, no futura). Las bebidas sin alcohol suman el 100 % del volumen a la meta, porque la ingesta adecuada de EFSA es de agua total (bebidas de todo tipo y humedad de los alimentos). El alcohol se registra pero no suma; la sopa y los caldos se registran como alimento y no suman, porque su agua ya está en el ~20 % que se atribuye a los alimentos. Los registros anteriores sin tipo se tratan como agua.
+
 ## Consejos y libro de beneficios
 - **Consejos:** mensajes breves de `data/notificaciones_hidratacion.json`, al azar y sin repetirse hasta haber salido todos. Se programan en el punto medio entre tomas consecutivas, dentro del horario de despertar y dormir y nunca después de la última toma. Frecuencia: desactivados, 3 al día (por defecto) o uno entre cada toma.
 - **Cómo llegan:** con la app abierta, como aviso discreto con enlace al libro; en segundo plano, como notificación del sistema si se concede el permiso; y por calendario, porque el `.ics` puede incluir 14 días de consejos. No son notificaciones push de servidor: con la app cerrada el navegador no garantiza su entrega.
