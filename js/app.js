@@ -1,6 +1,6 @@
 const $=id=>document.getElementById(id);
 const K='hidrametric.v2';
-let custom=null,perfil=null,meta=0,log={fecha:hoy(),items:[]};
+let custom=null,perfil=null,ULT=null,meta=0,log={fecha:hoy(),items:[]};
 function hoy(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function load(){try{const s=JSON.parse(localStorage.getItem(K)||'{}');if(s.perfil)for(const k in s.perfil){const e=$(k);if(e)e.value=s.perfil[k]}
  if(s.log&&s.log.fecha===hoy())log=s.log;custom=s.custom||null;$('alOn').checked=!!s.alOn;$('themeBtn')&&setTheme(s.tema||'light')}catch(e){setTheme('light')}}
@@ -20,12 +20,12 @@ function validar(){
  const e=$('err');e.textContent=msg;e.style.display=msg?'block':'none';return ok}
 
 function calcular(){
- if(!validar()){perfil=null;meta=0;['bmr','tdee','meta'].forEach(i=>$(i).textContent='–');$('desglose').textContent='';render();return}
+ if(!validar()){perfil=null;meta=0;ULT=null;renderCal();['bmr','tdee','meta'].forEach(i=>$(i).textContent='–');$('desglose').textContent='';render();return}
  const p=leer(),h=p.sexo==='h',w=+p.peso,t=+p.estatura,a=+p.edad;
  const bmr=10*w+6.25*t-5*a+(h?5:-161),tdee=bmr*p.act;
  const ai=h?2500:2000,agua=Math.max(ai,tdee);
  const extra=(+p.clima)+(h?0:+p.estado);
- meta=Math.round((agua*.8+extra)/50)*50;perfil=p;
+ meta=Math.round((agua*.8+extra)/50)*50;perfil=p;ULT={bmr,tdee,ai,agua,extra};
  $('bmr').textContent=Math.round(bmr)+' kcal';$('tdee').textContent=Math.round(tdee)+' kcal';$('meta').textContent=(meta/1000).toFixed(2)+' L';
  $('desglose').textContent='Agua total de referencia: '+(agua/1000).toFixed(2)+' L ('+(agua===ai?'EFSA AI':'1 ml/kcal')+') · de bebidas ≈80 % = '+Math.round(agua*.8)+' ml'+(extra?' · ajustes +'+extra+' ml':'')+'.';
  save();renderEditor();renderCal();render()}
@@ -53,7 +53,7 @@ function esperado(){
  if(!perfil||!meta)return 0;
  const n=new Date(),mn=n.getHours()*60+n.getMinutes();let c=0;
  slots().forEach(x=>{if(mins(x.t)<=mn)c+=x.ml});return Math.min(c,meta)}
-const MSG=[[25,'Empieza con un vaso de agua 💧'],[50,'Buen comienzo, ¡sigue así!'],[75,'¡Vas muy bien!']];
+const MSG=[[25,'Empieza con un vaso de agua{n} 💧'],[50,'Buen comienzo{n}, ¡sigue así!'],[75,'¡Vas muy bien{n}!']];
 function render(){
  const ml=total(),pct=meta?Math.round(ml/meta*100):0,r1=meta?Math.min(ml/meta,1):0,Y=v=>'translateY('+(284-236*v)+'px)',n=new Date(),ex=esperado();
  $('pct').textContent=pct+' %';$('vol').textContent=ml+' ml / '+(meta||'–')+' ml';
@@ -61,15 +61,16 @@ function render(){
  $('mkLv').textContent=ml+' ml';$('mkRv').textContent=ex+' ml';
  $('mkRt').textContent='META A LAS '+String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0');
  $('stLeft').textContent=meta?Math.max(meta-ml,0):'–';$('stGoal').textContent=meta||'–';
- let c1='#ffffff',c2='#e0f2fe',bn='',cls='',m=(MSG.find(x=>pct<x[0])||[0,'¡Casi llegas a tu meta!'])[1];
+ let c1='#ffffff',c2='#e0f2fe',bn='',cls='',m=(MSG.find(x=>pct<x[0])||[0,'¡Casi llegas a tu meta{n}!'])[1];
  if(!meta)m='Completa tu perfil para calcular tu meta';
  else if(ml>meta*1.15){c1='#fecaca';c2='#fca5a5';cls='bad';bn='Exceso superior al 115 % de la meta.';m='Superaste tu meta: detén la ingesta de líquidos'}
  else if(ml>meta){c1='#fde68a';c2='#fcd34d';cls='warn';bn='Meta diaria superada.';m='Meta superada: no necesitas beber más'}
- else if(ml===meta){c1='#bbf7d0';c2='#86efac';m='¡Meta cumplida! 🎉'}
+ else if(ml===meta){c1='#bbf7d0';c2='#86efac';m='¡Meta cumplida{n}! 🎉'}
  $('s1').setAttribute('stop-color',c1);$('s2').setAttribute('stop-color',c2);$('msg').textContent=m;
  $('exc').textContent=meta&&ml>meta?'Exceso: +'+(ml-meta)+' ml':'';
  const b=$('banner');b.className='banner'+(cls?' on '+cls:'');$('bannerTxt').textContent=bn;
- if(typeof renderHoy==='function')renderHoy();timeline()}
+ m=m.replace('{n}',typeof nomUsuario==='function'&&nomUsuario()?', '+nomUsuario():'');$('msg').textContent=m;
+ if(typeof renderHoy==='function')renderHoy();if(typeof pintarId==='function')pintarId();timeline()}
 
 /* ===== Plan de tomas (automático o personalizado) ===== */
 const mins=t=>{const [h,m]=t.split(':');return +h*60+ +m};
@@ -146,9 +147,16 @@ document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g
 async function compartir(){const d={title:'HidraMetric',text:'HidraMetric: planificador de hidratación basado en evidencia.',url:location.href};
  try{if(navigator.share){await navigator.share(d);return}await navigator.clipboard.writeText(d.url);modal('Enlace copiado','El enlace de la app se copió al portapapeles.')}
  catch(e){if(e.name!=='AbortError')modal('Compartir HidraMetric','Copia este enlace:<br><b style="word-break:break-all">'+d.url+'</b>')}}
-function renderCal(){if(!perfil){$('calBox').innerHTML='<p class="note">Completa el perfil.</p>';return}
- const b=10*+perfil.peso+6.25*+perfil.estatura-5*+perfil.edad+(perfil.sexo==='h'?5:-161);
- $('calBox').innerHTML='<table><tr><td>Metabolismo basal (BMR)</td><td>'+Math.round(b)+' kcal</td></tr>'+[['Sedentario',1.2],['Ligero',1.375],['Moderado',1.55],['Intenso',1.725]].map(a=>'<tr><td>Gasto total · '+a[0]+'</td><td>'+Math.round(b*a[1])+' kcal</td></tr>').join('')+'</table>'}
+function renderCal(){
+ const B=$('calBox');if(!perfil||!ULT){B.innerHTML='<p class="note">Completa tu perfil para ver tu estimación.</p>';return}
+ const p=perfil,u=ULT,h=p.sexo==='h',w=+p.peso,t=+p.estatura,a=+p.edad,f=v=>Math.round(v).toLocaleString('es'),ml=v=>f(v)+' ml';
+ const NIV=[['Sedentario',1.2],['Ligero',1.375],['Moderado',1.55],['Intenso',1.725]],mine={1.2:'sedentaria',1.375:'ligera',1.55:'moderada',1.725:'intensa'}[+p.act]||'moderada';
+ B.innerHTML='<div class="cd"><small>Calculado con los datos de tu perfil</small><p>'+(h?'Hombre':'Mujer')+' · '+a+' años · '+t+' cm · '+w+' kg · actividad '+mine+'</p></div>'+
+ '<h4 class="cs">Metabolismo basal (BMR): '+f(u.bmr)+' kcal</h4><p class="note">Energía que gasta tu cuerpo en reposo para mantenerse en funcionamiento. Se estima con la ecuación de Mifflin–St Jeor: 10 × '+w+' + 6,25 × '+t+' − 5 × '+a+(h?' + 5':' − 161')+' = '+f(u.bmr)+' kcal.</p>'+
+ '<h4 class="cs">Gasto total (TDEE): '+f(u.tdee)+' kcal</h4><p class="note">Es tu BMR multiplicado por el factor de tu nivel de actividad: lo que gastas en un día típico, contando el movimiento y el ejercicio.</p>'+
+ '<table>'+NIV.map(n=>'<tr'+(n[1]===+p.act?' class="me"':'')+'><td>'+n[0]+' × '+String(n[1]).replace('.',',')+(n[1]===+p.act?' · tu nivel':'')+'</td><td>'+f(u.bmr*n[1])+' kcal</td></tr>').join('')+'</table>'+
+ '<h4 class="cs">De dónde sale tu meta de líquidos</h4><ol class="stp"><li>Agua según energía: 1 ml por cada kcal de tu TDEE = <b>'+ml(u.tdee)+'</b></li><li>Ingesta adecuada de agua total de EFSA para '+(h?'hombres':'mujeres')+': <b>'+ml(u.ai)+'</b></li><li>Se usa el mayor de los dos: <b>'+ml(u.agua)+'</b></li><li>Las bebidas aportan ≈80 %: <b>'+ml(u.agua*.8)+'</b>'+(u.extra?' + ajustes por calor, embarazo o lactancia (<b>'+ml(u.extra)+'</b>)':'')+'</li><li>Redondeo a 50 ml: <b>meta de '+ml(meta)+'</b></li></ol>'+
+ '<p class="note">Son estimaciones para adultos sanos: tu gasto real puede ser distinto. Si cambias tus datos en Perfil, todo se recalcula.</p>'}
 function reloj(){const n=new Date();let h=n.getHours();const ap=h>=12?'PM':'AM';h=h%12||12;
  $('clock').textContent=String(h).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')+':'+String(n.getSeconds()).padStart(2,'0')+' '+ap;
  if(log.fecha!==hoy()){log={fecha:hoy(),items:[]};save();render()}}

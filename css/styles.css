@@ -157,3 +157,16 @@ nav.bot button.act{color:var(--tx)}nav.bot button.act i{background:var(--acc)}
 .hr:last-of-type{border:0}.hh{font:700 .75rem ui-monospace,monospace;color:var(--neon);min-width:3.2em}
 .hr .gr{flex:1}.hr em{font-size:.62rem;font-weight:800;color:var(--warn);font-style:normal;text-transform:uppercase}
 .hr button{background:none;border:0;color:var(--tx2);cursor:pointer;font-size:.9rem}.hm{font-weight:800}
+/* Identidad y calorías */
+.hi{display:flex;align-items:center;gap:12px;margin:2px 2px 12px}
+.av{width:52px;height:52px;border-radius:50%;border:2px solid var(--neon);background:var(--acc);display:flex;align-items:center;justify-content:center;font-size:1.7rem;overflow:hidden;padding:0;cursor:pointer;flex:none;color:var(--tx)}
+.av img{width:100%;height:100%;object-fit:cover}.av.sm{width:44px;height:44px;font-size:1.4rem;cursor:default}
+.hi1{font-weight:800;font-size:1.1rem}.hi2{font-size:.82rem;color:var(--tx2);margin-top:2px}
+.idb{display:flex;gap:12px;align-items:flex-end}.avs{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.avs button{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--bd);background:var(--card);font-size:1.2rem;cursor:pointer}
+.avs button.on{border-color:var(--pri);background:var(--acc)}
+.dwh{display:flex;align-items:center;gap:12px;padding:4px 16px 16px}.dwh h3{padding:0}.dwh small{color:var(--tx2);font-size:.78rem}
+.cs{font-size:.95rem;margin:18px 0 4px}
+.cd{background:var(--acc);border-radius:12px;padding:12px 14px}.cd small{font-size:.65rem;text-transform:uppercase;font-weight:800;color:var(--tx2);letter-spacing:1px}.cd p{font-weight:700;margin-top:4px;font-size:.9rem}
+.cal tr.me td{color:var(--neon);font-weight:800}.cal table{margin-top:8px}
+.stp{margin:8px 0 8px 20px;line-height:1.7;font-size:.88rem}

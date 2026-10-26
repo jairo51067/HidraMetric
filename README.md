@@ -37,6 +37,9 @@ En Vercel: **Add New → Project →** importar el repositorio. *Framework Prese
 - **Android (Chrome):** menú lateral → *Instalar app*.
 - **iPhone (Safari):** Compartir → *Añadir a pantalla de inicio*.
 
+## Identidad y estimación de calorías
+En **Perfil** se puede indicar un nombre o seudónimo y elegir un avatar o subir una foto (se recorta y reduce a 160 px en el propio dispositivo; no se envía a ningún servidor). El nombre aparece en el saludo de Inicio, en el menú lateral y en los mensajes de ánimo de la botella. **Calorías y gasto** muestra con qué datos del perfil se calcula cada cifra (BMR de Mifflin–St Jeor, TDEE por factor de actividad) y cómo se llega a la meta de líquidos.
+
 ## Registro de bebidas
 Botón **Bebidas** de Inicio: elige el tipo, el volumen (teclado o atajos 150/250/330/500 ml) y la hora (hoy, no futura). Las bebidas sin alcohol suman el 100 % del volumen a la meta, porque la ingesta adecuada de EFSA es de agua total (bebidas de todo tipo y humedad de los alimentos). El alcohol se registra pero no suma; la sopa y los caldos se registran como alimento y no suman, porque su agua ya está en el ~20 % que se atribuye a los alimentos. Los registros anteriores sin tipo se tratan como agua.
 

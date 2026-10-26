@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.0 — 2026-10-26
+- Calorías y gasto: explica qué es el BMR y el TDEE, muestra los datos del perfil con que se calcula, la fórmula con tus números, tu nivel de actividad resaltado y los pasos de los que sale tu meta de líquidos.
+- Identidad: nombre o seudónimo, avatar (emoji) o foto en Perfil. Aparecen en el saludo de Inicio, en el menú lateral y en los mensajes de ánimo. Se guardan solo en el dispositivo.
+
 ## 1.3.0 — 2026-10-25
 - Registro de otras bebidas: ventana inferior con tipos (agua, té, café, jugo, leche, agua de coco, bebida deportiva, refresco, agua con gas, alcohol, sopa), volumen con teclado numérico y hora editable.
 - Las bebidas sin alcohol suman el 100 % de su volumen a la meta; el alcohol se registra pero no suma; la sopa y los caldos se registran como alimento y no suman.

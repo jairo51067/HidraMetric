@@ -16,9 +16,9 @@
 </head>
 <body>
 <header class="top"><button class="ico" id="menuBtn" aria-label="Menú">☰</button><h1>HidraMetric</h1><div class="clock" id="clock">--:--:--</div><button class="ico" id="themeBtn" aria-label="Cambiar tema">🌙</button></header>
-<div id="drawer"><div class="pn"><h3>💧 HidraMetric</h3>
+<div id="drawer"><div class="pn"><div class="dwh"><span class="av sm" id="dwAv"></span><div><h3>HidraMetric</h3><small id="dwNom"></small></div></div>
 <button class="di" data-go="home">🏠 Inicio</button><button class="di" data-go="tomas">🗓️ Plan de tomas</button><button class="di" data-go="alarmas">⏰ Alarmas y horarios</button><button class="di" data-go="perfil">⚙️ Perfil y requerimiento</button><button class="di" data-go="calorias">🔥 Calorías y gasto</button><button class="di" data-go="libro">📖 Beneficios de hidratarte <span class="nw" id="nwDot" hidden>NUEVO</span></button><button class="di" data-go="base">🔬 Base científica</button><button class="di" data-share>📤 Compartir app</button><button class="di" id="installBtn" hidden>📲 Instalar app</button><button class="di" data-go="acerca">ℹ️ Acerca de</button></div><div class="sc" id="scrim"></div></div>
-<main class="app"><section id="v-home"><div class="banner" id="banner" role="alert"><span id="bannerTxt"></span><button class="btn o" style="padding:4px 8px;font-size:.75rem" id="moreBtn">Saber más</button></div><section class="card hero"><div class="hb">
+<main class="app"><section id="v-home"><div class="hi"><button class="av" id="hiAv" data-go="perfil" aria-label="Abrir perfil"></button><div><div class="hi1" id="hi1">Hola</div><div class="hi2" id="hi2"></div></div></div><div class="banner" id="banner" role="alert"><span id="bannerTxt"></span><button class="btn o" style="padding:4px 8px;font-size:.75rem" id="moreBtn">Saber más</button></div><section class="card hero"><div class="hb">
 <svg id="bottle" viewBox="0 0 360 310" role="img" aria-label="Botella que se llena con tu consumo de agua">
 <defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop id="s1" offset="0" stop-color="#ffffff"/><stop id="s2" offset="1" stop-color="#e0f2fe"/></linearGradient><clipPath id="bc"><path d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z"/></clipPath></defs>
 <path d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z" fill="rgba(255,255,255,.14)"/>
@@ -47,7 +47,11 @@
 <p class="note">Mensajes breves y variados entre tus tomas, solo dentro de tu horario de despertar y dormir y nunca después de la última toma. Con la app abierta aparecen como aviso discreto; en segundo plano, como notificación si diste permiso. Un mismo consejo no se repite hasta haber visto los demás.</p>
 <label style="display:flex;gap:8px;align-items:center;margin-top:12px;text-transform:none;font-size:.8rem"><input type="checkbox" id="icsTips" style="width:auto" checked> Incluir consejos en el .ics (14 días; vuelve a exportar para renovarlos)</label>
 <div class="btns" style="margin-top:12px"><button class="btn o" id="tipTest">Probar un consejo</button></div></div>
-</section><section id="v-perfil" hidden><h2 class="vt">Perfil y requerimiento</h2><div class="card">
+</section><section id="v-perfil" hidden><h2 class="vt">Perfil y requerimiento</h2>
+<div class="card" style="margin-bottom:14px"><div class="idb"><button class="av" id="avBtn" aria-label="Cambiar foto"></button><div class="fg" style="flex:1"><label for="nombre">Nombre o seudónimo</label><input id="nombre" type="text" maxlength="24" autocomplete="nickname" placeholder="¿Cómo quieres que te llamemos?"></div></div>
+<div class="avs" id="avList"></div>
+<div class="btns" style="justify-content:flex-start"><button class="btn o" id="fotoBtn">📷 Subir foto</button><button class="btn o" id="fotoRm" hidden>Quitar foto</button></div><input type="file" id="fotoIn" accept="image/*" hidden>
+<p class="note">Tu nombre, avatar y foto se guardan solo en este dispositivo y aparecen en la pantalla principal.</p></div><div class="card">
  <div class="g2">
   <div class="fg"><label for="sexo">Sexo biológico</label><select id="sexo"><option value="h">Hombre</option><option value="m">Mujer</option></select></div>
   <div class="fg"><label for="edad">Edad (años)</label><input id="edad" type="number" value="30" min="18" max="100"></div>
@@ -66,7 +70,7 @@
   <div><h4>Meta bebida</h4><p id="meta">–</p></div>
  </div>
  <p class="note" id="desglose"></p>
-</div></section><section id="v-calorias" hidden><h2 class="vt">Calorías y gasto</h2><div class="card cal"><div id="calBox"></div><p class="note">BMR por Mifflin–St Jeor y gasto total por factor de actividad: estimaciones para adultos sanos. No equivalen a una prescripción dietética.</p></div></section><section id="v-base" hidden><h2 class="vt">Base científica</h2><div class="card">
+</div></section><section id="v-calorias" hidden><h2 class="vt">Calorías y gasto</h2><div class="card cal"><div id="calBox"></div><p class="note">Información orientativa; no es una prescripción dietética ni sustituye el consejo de un profesional de la salud.</p></div></section><section id="v-base" hidden><h2 class="vt">Base científica</h2><div class="card">
  <ul class="src">
   <li><b>Meta de agua total:</b> ingesta adecuada EFSA 2010 de 2,0 L/día (mujeres) y 2,5 L/día (hombres), que incluye el agua de los alimentos; la app asume ~20 % por alimentos y ~80 % por bebidas. Se toma el mayor entre ese valor y 1 ml por kcal de gasto energético (criterio clásico NRC 1989). <a style="color:var(--neon)" href="https://www.efsa.europa.eu/en/press/news/nda100326" target="_blank" rel="noopener">EFSA</a></li>
   <li><b>BMR:</b> ecuación de Mifflin–St Jeor (Am J Clin Nutr 1990;51:241-7): 10·peso + 6,25·estatura − 5·edad + 5 (hombres) o − 161 (mujeres).</li>
@@ -78,7 +82,7 @@
   </ul>
  <p class="note">Herramienta informativa para adultos sanos de 18 años o más. No sustituye el consejo médico; con enfermedad renal, cardíaca, hepática o tratamientos que alteren el equilibrio de líquidos, siga las indicaciones de su médico.</p>
 </div></section><section id="v-libro" hidden><div id="libroBox"></div></section>
-<section id="v-acerca" hidden><h2 class="vt">Acerca de</h2><div class="card"><p class="note" style="font-size:.9rem"><b>HidraMetric</b> · v1.3.0<br><br>Planificador de hidratación que calcula tu meta diaria con referencias de EFSA y la ecuación de Mifflin–St Jeor, reparte las tomas durante el día y te avisa con alarmas. Tus datos se guardan solo en este dispositivo.<br><br>Herramienta informativa; no sustituye el consejo médico.</p></div></section></main>
+<section id="v-acerca" hidden><h2 class="vt">Acerca de</h2><div class="card"><p class="note" style="font-size:.9rem"><b>HidraMetric</b> · v1.4.0<br><br>Planificador de hidratación que calcula tu meta diaria con referencias de EFSA y la ecuación de Mifflin–St Jeor, reparte las tomas durante el día y te avisa con alarmas. Tus datos se guardan solo en este dispositivo.<br><br>Herramienta informativa; no sustituye el consejo médico.</p></div></section></main>
 <noscript><p style="padding:16px">HidraMetric necesita JavaScript.</p></noscript>
 <div class="sheet" id="sheet"><div class="sp" role="dialog" aria-modal="true" aria-label="Registrar bebida">
 <div class="sh-top"><h3>Registrar bebida</h3><button class="ico" id="shX" aria-label="Cerrar">✕</button></div>
@@ -96,5 +100,6 @@
 <script src="js/libro.js" defer></script>
 <script src="js/avisos.js" defer></script>
 <script src="js/bebidas.js" defer></script>
+<script src="js/identidad.js" defer></script>
 </body>
 </html>
