@@ -1,0 +1,74 @@
+{
+  "notificaciones_hidratacion": [
+    {
+      "id": "push_001",
+      "categoria": "cognitivo",
+      "titulo": "🧠 Optimiza tu enfoque",
+      "mensaje": "El cerebro es cerca de 75% agua. Una caída del 1-2% en la hidratación puede reducir tu concentración. ¡Toma un sorbo por tus neuronas!",
+      "contexto_cientifico": "Evita la contracción celular por estrés osmótico en la corteza cerebral."
+    },
+    {
+      "id": "push_002",
+      "categoria": "cognitivo",
+      "titulo": "⚡ Adiós a la fatiga mental",
+      "mensaje": "¿Te sientes lento o con sueño? Antes de buscar cafeína, dale a tu cerebro el agua que necesita para mantener su volumen celular.",
+      "contexto_cientifico": "La deshidratación subclínica altera el transporte de nutrientes y la velocidad de procesamiento cognitivo."
+    },
+    {
+      "id": "push_003",
+      "categoria": "rendimiento",
+      "titulo": "🏋️‍♂️ Protege tus articulaciones",
+      "mensaje": "El cartílago articular es en gran parte agua. Mantenerte bien hidratado favorece el funcionamiento normal de tus articulaciones.",
+      "contexto_cientifico": "Mantenimiento de la viscoelasticidad de las estructuras articulares."
+    },
+    {
+      "id": "push_004",
+      "categoria": "rendimiento",
+      "titulo": "💪 Cuida tus músculos",
+      "mensaje": "Tus músculos necesitan un buen equilibrio de agua y electrolitos para contraerse correctamente. ¡Cuida tu rendimiento físico de hoy!",
+      "contexto_cientifico": "Prevención de la fatiga miocítica por alteración del gradiente de electrolitos."
+    },
+    {
+      "id": "push_005",
+      "categoria": "metabolismo",
+      "titulo": "🔄 Apoya tu metabolismo",
+      "mensaje": "El agua es el solvente universal de tus células. Estar hidratado facilita que tu cuerpo transforme los alimentos en energía útil.",
+      "contexto_cientifico": "Soporte termogénico y optimización de las reacciones químicas de la tasa metabólica basal."
+    },
+    {
+      "id": "push_006",
+      "categoria": "salud_renal",
+      "titulo": "🛡️ Apoyo a la filtración renal",
+      "mensaje": "Facilita el trabajo de tus riñones. Con suficiente agua, la eliminación de desechos metabólicos es más eficiente.",
+      "contexto_cientifico": "Mantenimiento de la tasa de filtración glomerular óptima y reducción de la carga osmótica en nefronas."
+    },
+    {
+      "id": "push_007",
+      "categoria": "bienestar",
+      "titulo": "🍽️ ¿Hambre o deshidratación?",
+      "mensaje": "A veces la sed se confunde con hambre. Un vaso de agua puede ayudarte a distinguirlas.",
+      "contexto_cientifico": "Regulación neuroendocrina de la ingesta de fluidos y la saciedad."
+    },
+    {
+      "id": "push_008",
+      "categoria": "salud_vascular",
+      "titulo": "🩸 Fluidez en tu circulación",
+      "mensaje": "Mantener tu volumen de sangre ayuda a que tu corazón y tu circulación trabajen sin esfuerzo extra.",
+      "contexto_cientifico": "Preservación del volumen plasmático y del gasto cardíaco sin estrés compensatorio."
+    },
+    {
+      "id": "push_009",
+      "categoria": "estetica",
+      "titulo": "✨ Elasticidad desde el interior",
+      "mensaje": "El agua sostiene la integridad del estrato córneo. Mantén tu piel protegida y flexible cumpliendo tu meta de hoy.",
+      "contexto_cientifico": "Preservación de la turgencia cutánea y optimización de la función de barrera epidérmica."
+    },
+    {
+      "id": "push_010",
+      "categoria": "termorregulacion",
+      "titulo": "🌡️ Tu termostato biológico",
+      "mensaje": "El sudor disipa el calor corporal de manera eficiente solo si cuentas con reservas de fluidos estables. ¡No te descuides!",
+      "contexto_cientifico": "Termorregulación por evaporación e integración de la volemia fisiológica."
+    }
+  ]
+}

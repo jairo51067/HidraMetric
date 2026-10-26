@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Planificador de hidratación basado en evidencia (EFSA, Mifflin–St Jeor)">
+<meta name="theme-color" content="#0284c7">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HidraMetric">
+<title>HidraMetric · Planificador de hidratación basado en evidencia</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="top"><button class="ico" id="menuBtn" aria-label="Menú">☰</button><h1>HidraMetric</h1><div class="clock" id="clock">--:--:--</div><button class="ico" id="themeBtn" aria-label="Cambiar tema">🌙</button></header>
+<div id="drawer"><div class="pn"><div class="dwh"><span class="av sm" id="dwAv"></span><div><h3>HidraMetric</h3><small id="dwNom"></small></div></div>
+<button class="di" data-go="home">🏠 Inicio</button><button class="di" data-go="tomas">🗓️ Plan de tomas</button><button class="di" data-go="alarmas">⏰ Alarmas y horarios</button><button class="di" data-go="perfil">⚙️ Perfil y requerimiento</button><button class="di" data-go="calorias">🔥 Calorías y gasto</button><button class="di" data-go="libro">📖 Beneficios de hidratarte <span class="nw" id="nwDot" hidden>NUEVO</span></button><button class="di" data-go="base">🔬 Base científica</button><button class="di" data-share>📤 Compartir app</button><button class="di" id="installBtn" hidden>📲 Instalar app</button><button class="di" data-go="acerca">ℹ️ Acerca de</button></div><div class="sc" id="scrim"></div></div>
+<main class="app"><section id="v-home"><div class="hi"><button class="av" id="hiAv" data-go="perfil" aria-label="Abrir perfil"></button><div><div class="hi1" id="hi1">Hola</div><div class="hi2" id="hi2"></div></div></div><div class="banner" id="banner" role="alert"><span id="bannerTxt"></span><button class="btn o" style="padding:4px 8px;font-size:.75rem" id="moreBtn">Saber más</button></div><section class="card hero"><div class="hb">
+<svg id="bottle" viewBox="0 0 360 310" role="img" aria-label="Botella que se llena con tu consumo de agua">
+<defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop id="s1" offset="0" stop-color="#ffffff"/><stop id="s2" offset="1" stop-color="#e0f2fe"/></linearGradient><clipPath id="bc"><path d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z"/></clipPath></defs>
+<path d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z" fill="rgba(255,255,255,.14)"/>
+<g clip-path="url(#bc)"><g id="wv" style="transform:translateY(284px);transition:transform .9s cubic-bezier(.4,0,.2,1)"><g class="w2"><path d="M-60 8Q-45 0-30 8T0 8T30 8T60 8T90 8T120 8T150 8T180 8T210 8T240 8T270 8V330H-60Z" fill="url(#wg)" opacity=".55"/></g><g class="w1"><path d="M-60 6Q-45 14-30 6T0 6T30 6T60 6T90 6T120 6T150 6T180 6T210 6T240 6T270 6V330H-60Z" fill="url(#wg)"/></g></g></g>
+<path d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+<rect x="160" y="6" width="40" height="22" rx="5" fill="#fff"/>
+<g id="mkL" style="transform:translateY(284px);transition:transform .9s cubic-bezier(.4,0,.2,1)"><line x1="8" y1="0" x2="128" y2="0" stroke="#fff" stroke-opacity=".85"/><text id="mkLv" x="8" y="-8" fill="#fff" font-size="26" font-weight="700">0 ml</text><text x="8" y="16" fill="#fff" fill-opacity=".8" font-size="11" letter-spacing="1">CONSUMIDO</text></g>
+<g id="mkR" style="transform:translateY(284px);transition:transform .9s cubic-bezier(.4,0,.2,1)"><line x1="232" y1="0" x2="352" y2="0" stroke="#fff" stroke-opacity=".85"/><text id="mkRv" x="352" y="-8" text-anchor="end" fill="#fff" font-size="26" font-weight="700">0 ml</text><text id="mkRt" x="352" y="16" text-anchor="end" fill="#fff" fill-opacity=".8" font-size="11" letter-spacing="1">META A LAS --:--</text></g>
+</svg>
+<div class="pct" id="pct">0 %</div><div class="vol" id="vol">0 ml</div><div class="exc" id="exc"></div><div class="msg" id="msg"></div></div>
+<div class="stats"><div><small>Faltan</small><span><b id="stLeft">–</b> ml</span></div><div><small>Meta</small><span><b id="stGoal">–</b> ml</span></div></div></section>
+<div class="abar" role="toolbar" aria-label="Registrar consumo"><button data-add="250"><i>💧</i>+250 ml</button><button data-add="300"><i>🥤</i>+300 ml</button><button id="customBtn"><i>☕</i>Bebidas</button><button id="undoBtn"><i>↩️</i>Deshacer</button><button id="resetBtn" class="rs"><i>🔄</i>Reiniciar</button></div>
+<section class="card ahora" id="ahora"><h4>Ahora</h4><div id="ahoraBox"></div></section>
+<section class="card ahora" id="hoyCard"><h4>Registro de hoy</h4><div id="hoyList"></div></section>
+<section class="card teaser" id="teaser" hidden></section></section><section id="v-tomas" hidden><h2 class="vt">Plan de tomas</h2><div class="card"><div class="tl" id="tl"></div>
+ <p class="note">Las tomas reparten la meta de forma uniforme durante las horas de vigilia. Una toma se marca como cumplida cuando el acumulado alcanza lo previsto hasta ese momento.</p></div></section><section id="v-alarmas" hidden><h2 class="vt">Alarmas y horarios</h2><div class="card">
+ <p class="note" id="cnote" hidden>Estás usando un plan personalizado: si cambias tu perfil, la meta se actualiza pero tus tomas no. Pulsa «Restablecer automático» para recalcularlas.</p>
+ <div id="edRows" class="tl"></div>
+ <div class="btns" style="margin-top:12px"><button class="btn o" id="addSlot">+ Toma</button><button class="btn o" id="autoSlots">Restablecer automático</button></div>
+ <div class="fg" style="margin-top:14px"><label style="display:flex;gap:8px;align-items:center;text-transform:none;font-size:.8rem"><input type="checkbox" id="alOn" style="width:auto"> Alarma con la app abierta (sonido, vibración y aviso)</label></div>
+ <button class="btn" style="width:100%;margin-top:12px" id="icsBtn">Exportar alarmas al calendario (.ics)</button>
+ <p class="note">La alarma en la app solo suena con la página abierta. Para alarmas con el teléfono bloqueado, exporta el .ics e impórtalo en tu calendario (se repite a diario). Si cambias horarios, borra los eventos anteriores y vuelve a exportar. Cada toma tiene su casilla para activar o desactivar su alarma.</p>
+</div>
+<div class="card" style="margin-top:14px"><h2>Consejos de hidratación</h2>
+<div class="fg"><label for="tipFreq">Frecuencia</label><select id="tipFreq"><option value="0">Desactivados</option><option value="3">Pocos (3 al día)</option><option value="99">Uno entre cada toma</option></select></div>
+<p class="note">Mensajes breves y variados entre tus tomas, solo dentro de tu horario de despertar y dormir y nunca después de la última toma. Con la app abierta aparecen como aviso discreto; en segundo plano, como notificación si diste permiso. Un mismo consejo no se repite hasta haber visto los demás.</p>
+<label style="display:flex;gap:8px;align-items:center;margin-top:12px;text-transform:none;font-size:.8rem"><input type="checkbox" id="icsTips" style="width:auto" checked> Incluir consejos en el .ics (14 días; vuelve a exportar para renovarlos)</label>
+<div class="btns" style="margin-top:12px"><button class="btn o" id="tipTest">Probar un consejo</button></div></div>
+</section><section id="v-perfil" hidden><h2 class="vt">Perfil y requerimiento</h2>
+<div class="card" style="margin-bottom:14px"><div class="idb"><button class="av" id="avBtn" aria-label="Cambiar foto"></button><div class="fg" style="flex:1"><label for="nombre">Nombre o seudónimo</label><input id="nombre" type="text" maxlength="24" autocomplete="nickname" placeholder="¿Cómo quieres que te llamemos?"></div></div>
+<div class="avs" id="avList"></div>
+<div class="btns" style="justify-content:flex-start"><button class="btn o" id="fotoBtn">📷 Subir foto</button><button class="btn o" id="fotoRm" hidden>Quitar foto</button></div><input type="file" id="fotoIn" accept="image/*" hidden>
+<p class="note">Tu nombre, avatar y foto se guardan solo en este dispositivo y aparecen en la pantalla principal.</p></div><div class="card">
+ <div class="g2">
+  <div class="fg"><label for="sexo">Sexo biológico</label><select id="sexo"><option value="h">Hombre</option><option value="m">Mujer</option></select></div>
+  <div class="fg"><label for="edad">Edad (años)</label><input id="edad" type="number" value="30" min="18" max="100"></div>
+  <div class="fg"><label for="estatura">Estatura (cm)</label><input id="estatura" type="number" value="175" min="120" max="230"></div>
+  <div class="fg"><label for="peso">Peso (kg)</label><input id="peso" type="number" value="94" min="30" max="250" step=".1"></div>
+  <div class="fg full"><label for="act">Nivel de actividad</label><select id="act"><option value="1.2">Sedentario (×1.2)</option><option value="1.375">Ligero, 1–3 d/sem (×1.375)</option><option value="1.55" selected>Moderado, 3–5 d/sem (×1.55)</option><option value="1.725">Intenso, 6–7 d/sem (×1.725)</option></select></div>
+  <div class="fg"><label for="clima">Ambiente</label><select id="clima"><option value="0">Templado</option><option value="500">Cálido / calor (+500 ml)</option></select></div>
+  <div class="fg"><label for="estado">Condición</label><select id="estado"><option value="0">Ninguna</option><option value="300">Embarazo (+300 ml)</option><option value="700">Lactancia (+700 ml)</option></select></div>
+  <div class="fg"><label for="desp">Hora de despertar</label><input id="desp" type="number" value="7" min="0" max="12"></div>
+  <div class="fg"><label for="dorm">Hora de dormir</label><input id="dorm" type="number" value="23" min="16" max="24"></div>
+ </div>
+ <div class="err-msg" id="err"></div>
+ <div class="mp">
+  <div><h4>BMR</h4><p id="bmr">–</p></div>
+  <div><h4>TDEE</h4><p id="tdee">–</p></div>
+  <div><h4>Meta bebida</h4><p id="meta">–</p></div>
+ </div>
+ <p class="note" id="desglose"></p>
+</div></section><section id="v-calorias" hidden><h2 class="vt">Calorías y gasto</h2><div class="card cal"><div id="calBox"></div><p class="note">Información orientativa; no es una prescripción dietética ni sustituye el consejo de un profesional de la salud.</p></div></section><section id="v-base" hidden><h2 class="vt">Base científica</h2><div class="card">
+ <ul class="src">
+  <li><b>Meta de agua total:</b> ingesta adecuada EFSA 2010 de 2,0 L/día (mujeres) y 2,5 L/día (hombres), que incluye el agua de los alimentos; la app asume ~20 % por alimentos y ~80 % por bebidas. Se toma el mayor entre ese valor y 1 ml por kcal de gasto energético (criterio clásico NRC 1989). <a style="color:var(--neon)" href="https://www.efsa.europa.eu/en/press/news/nda100326" target="_blank" rel="noopener">EFSA</a></li>
+  <li><b>BMR:</b> ecuación de Mifflin–St Jeor (Am J Clin Nutr 1990;51:241-7): 10·peso + 6,25·estatura − 5·edad + 5 (hombres) o − 161 (mujeres).</li>
+  <li><b>TDEE:</b> BMR × factor de actividad (1,2 a 1,725), estimación convencional.</li>
+  <li><b>Embarazo/lactancia:</b> +300 ml / +700 ml (valores EFSA 2010).</li>
+  <li><b>Ritmo máximo:</b> la capacidad renal de excretar agua es de orientativamente 0,8–1 L/h; beber más rápido eleva el riesgo de hiponatremia (consenso de hiponatremia asociada al ejercicio, Clin J Sport Med 2015).</li>
+  <li><b>Calor (+500 ml):</b> estimación prudente; la necesidad real varía mucho entre personas.</li>
+ <li><b>Otras bebidas:</b> los valores de EFSA son de agua total (bebidas de todo tipo y humedad de los alimentos, ≈20 % del total). Por eso café, té, jugo, leche y demás bebidas sin alcohol suman el 100 % de su volumen. En el estudio de Maughan et al. (Am J Clin Nutr 2016), café, té y otras bebidas habituales no se diferenciaron del agua en la orina producida (ensayo en hombres jóvenes, un litro por toma). El alcohol se registra pero no suma, y la sopa se registra como alimento.</li>
+  </ul>
+ <p class="note">Herramienta informativa para adultos sanos de 18 años o más. No sustituye el consejo médico; con enfermedad renal, cardíaca, hepática o tratamientos que alteren el equilibrio de líquidos, siga las indicaciones de su médico.</p>
+</div></section><section id="v-libro" hidden><div id="libroBox"></div></section>
+<section id="v-acerca" hidden><h2 class="vt">Acerca de</h2><div class="card"><p class="note" style="font-size:.9rem"><b>HidraMetric</b> · v1.4.0<br><br>Planificador de hidratación que calcula tu meta diaria con referencias de EFSA y la ecuación de Mifflin–St Jeor, reparte las tomas durante el día y te avisa con alarmas. Tus datos se guardan solo en este dispositivo.<br><br>Herramienta informativa; no sustituye el consejo médico.</p></div></section></main>
+<noscript><p style="padding:16px">HidraMetric necesita JavaScript.</p></noscript>
+<div class="sheet" id="sheet"><div class="sp" role="dialog" aria-modal="true" aria-label="Registrar bebida">
+<div class="sh-top"><h3>Registrar bebida</h3><button class="ico" id="shX" aria-label="Cerrar">✕</button></div>
+<div class="sh-amt"><b id="shAmt">250</b> ml</div><div class="sh-sub" id="shSub">Agua</div>
+<div class="chips" id="shTipos"></div><div class="sh-note" id="shNote" hidden></div>
+<div class="sh-when"><span>Hoy a las</span><input type="time" id="shTime"></div>
+<div class="sh-q"><button data-q="150">150</button><button data-q="250">250</button><button data-q="330">330</button><button data-q="500">500</button></div>
+<div class="pad"><button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button data-k="00">00</button><button data-k="0">0</button><button data-k="<" aria-label="Borrar">⌫</button></div>
+<div class="err-msg" id="shErr"></div><button class="btn" id="shAdd" style="width:100%;margin-top:12px">Añadir</button></div></div>
+<div class="toast" id="toast" hidden role="status"></div>
+<nav class="bot"><button data-go="home" class="act"><i>🏠</i>Home</button><button data-go="tomas"><i>🗓️</i>Tomas</button><button data-go="alarmas"><i>⏰</i>Alarmas</button><button data-go="perfil"><i>⚙️</i>Perfil</button><button data-share><i>📤</i>Compartir</button></nav>
+<div class="ov" id="ov"><div class="mc" role="dialog" aria-modal="true"><h3 id="mt"></h3><div id="mb"></div><button class="btn" style="width:100%" id="mx">Entendido</button></div></div>
+
+<script src="js/app.js" defer></script>
+<script src="js/libro.js" defer></script>
+<script src="js/avisos.js" defer></script>
+<script src="js/bebidas.js" defer></script>
+<script src="js/identidad.js" defer></script>
+</body>
+</html>
