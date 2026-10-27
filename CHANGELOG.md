@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0 — 2026-10-27
+- La barra de acciones (+250, +300, Bebidas, Deshacer, Reiniciar) pasa encima de la botella: lo primero al abrir Inicio es decidir qué registrar.
+- Temperatura y clima actuales junto a la hora (Open-Meteo; solo con permiso de ubicación, opcional y revocable).
+- Iconos de línea propios, coherentes y naturales, en la barra superior, la barra inferior, la barra de acciones y el menú lateral.
+
 ## 1.4.0 — 2026-10-26
 - Calorías y gasto: explica qué es el BMR y el TDEE, muestra los datos del perfil con que se calcula, la fórmula con tus números, tu nivel de actividad resaltado y los pasos de los que sale tu meta de líquidos.
 - Identidad: nombre o seudónimo, avatar (emoji) o foto en Perfil. Aparecen en el saludo de Inicio, en el menú lateral y en los mensajes de ánimo. Se guardan solo en el dispositivo.

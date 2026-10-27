@@ -6,7 +6,7 @@ function load(){try{const s=JSON.parse(localStorage.getItem(K)||'{}');if(s.perfi
  if(s.log&&s.log.fecha===hoy())log=s.log;custom=s.custom||null;$('alOn').checked=!!s.alOn;$('themeBtn')&&setTheme(s.tema||'light')}catch(e){setTheme('light')}}
 function save(){try{localStorage.setItem(K,JSON.stringify({perfil:perfil||leer(),log,custom,alOn:$('alOn').checked,tema:document.documentElement.dataset.theme}))}catch(e){}}
 function leer(){const o={};['sexo','edad','estatura','peso','act','clima','estado','desp','dorm'].forEach(k=>o[k]=$(k).value);return o}
-function setTheme(t){document.documentElement.dataset.theme=t;$('themeBtn').textContent=t==='light'?'🌙':'☀️'}
+function setTheme(t){document.documentElement.dataset.theme=t;$('themeBtn').innerHTML='<svg class="ic" aria-hidden="true"><use href="#i-'+(t==='light'?'moon':'sun')+'"/></svg>'}
 function modal(t,b,lbl){$('mx').textContent=lbl||'Entendido';$('mt').textContent=t;$('mb').innerHTML='<p>'+b+'</p>';$('ov').classList.add('on')}
 $('mx').onclick=()=>$('ov').classList.remove('on');
 $('ov').onclick=e=>{if(e.target===$('ov'))$('ov').classList.remove('on')};

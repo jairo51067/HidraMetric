@@ -170,3 +170,11 @@ nav.bot button.act{color:var(--tx)}nav.bot button.act i{background:var(--acc)}
 .cd{background:var(--acc);border-radius:12px;padding:12px 14px}.cd small{font-size:.65rem;text-transform:uppercase;font-weight:800;color:var(--tx2);letter-spacing:1px}.cd p{font-weight:700;margin-top:4px;font-size:.9rem}
 .cal tr.me td{color:var(--neon);font-weight:800}.cal table{margin-top:8px}
 .stp{margin:8px 0 8px 20px;line-height:1.7;font-size:.88rem}
+/* Iconos de línea y clima */
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ico{display:flex;align-items:center;justify-content:center;padding:0}.ico .ic{width:20px;height:20px}
+nav.bot button i,.abar button i{display:flex;align-items:center;justify-content:center}
+.abar button i{color:var(--neon)}.abar .rs i{color:var(--bad)}
+nav.bot button.act .ic{color:var(--neon)}.di .ic{color:var(--neon)}
+.clock{display:flex;flex-direction:column;align-items:center;gap:1px;line-height:1.15;padding:4px 10px}
+.clock .wx{background:none;border:0;color:var(--tx2);font:700 .68rem system-ui,sans-serif;cursor:pointer;padding:0;white-space:nowrap}

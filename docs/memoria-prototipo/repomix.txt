@@ -1,0 +1,142 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+The content has been processed where comments have been removed, empty lines have been removed, line numbers have been added, content has been formatted for parsing in plain style, content has been compressed (code blocks are separated by ⋮---- delimiter).
+
+================================================================
+File Summary
+================================================================
+
+Purpose:
+--------
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+
+File Format:
+------------
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  a. A separator line (================)
+  b. The file path (File: path/to/file)
+  c. Another separator line
+  d. The full contents of the file
+  e. A blank line
+
+Usage Guidelines:
+-----------------
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+Notes:
+------
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Code comments have been removed from supported file types
+- Empty lines have been removed from all files
+- Line numbers have been added to the beginning of each line
+- Content has been formatted for parsing in plain style
+- Content has been compressed - code blocks are separated by ⋮---- delimiter
+- Files are sorted by Git change count (files with more changes are at the bottom)
+
+
+================================================================
+Directory Structure
+================================================================
+memoria-prototipo/
+  app-hidratacion-base-cientifica.md
+  app-hidratacion-trazabilidad.md
+  app-hidratacion.md
+
+================================================================
+Files
+================================================================
+
+================
+File: memoria-prototipo/app-hidratacion-base-cientifica.md
+================
+---
+name: app-hidratacion-base-cientifica
+description: Fórmulas, fuentes y supuestos de HidraMetric (EFSA 2010, Mifflin–St Jeor, ritmo máximo de ingesta) y qué falta verificar antes de publicar.
+sources: [chat]
+aliases: [fórmulas hidrametric, fuentes hidratación, validación científica hidratación]
+---
+
+- [stated] pidió que todo se base en datos reales, fórmulas comprobadas y datos científicamente validados
+- [stated] asked to remember: meta de bebida en la app = máximo entre la ingesta adecuada de agua total EFSA 2010 (2,5 L hombres, 2,0 L mujeres) y 1 ml por kcal de gasto (TDEE), multiplicado por 0,8 (≈80 % del agua viene de bebidas), más ajustes, redondeado a 50 ml
+- [stated] asked to remember: BMR por Mifflin–St Jeor (10·peso + 6,25·estatura − 5·edad, +5 hombres o −161 mujeres); TDEE con factores 1,2 / 1,375 / 1,55 / 1,725
+- [stated] asked to remember: ajustes de la app: +300 ml embarazo, +700 ml lactancia, +500 ml ambiente cálido (este último es estimación prudente, no valor normativo)
+- [stated] asked to remember: seguridad: solo adultos de 18 a 100 años; aviso al registrar más de 1 L en una hora (capacidad renal orientativa de 0,8 a 1 L/h); alerta de sobrehidratación sobre el 115 % de la meta; texto de que no sustituye consejo médico
+- [stated] asked to remember: referencias citadas en la app: EFSA Journal 2010;8(3):1459; Mifflin et al., Am J Clin Nutr 1990;51:241-7; NRC 1989 (1 ml/kcal); IOM 2005; consenso de hiponatremia asociada al ejercicio, Clin J Sport Med 2015
+- [stated] asked to remember: estado de verificación: solo los valores de EFSA se contrastaron con búsqueda web; el resto se citó de memoria del asistente y debe validarse antes de publicar la versión oficial
+- [stated] 2026-10-21: el usuario confía en las referencias y las considera las ideales; en el README quedan como revisadas y aceptadas por el autor (solo EFSA se contrastó con fuente oficial)
+- [stated] asked to remember: 2026-10-25 otras bebidas: los valores de EFSA son de agua total (bebidas de todo tipo y humedad de los alimentos, ≈20 % del total), por eso las bebidas sin alcohol suman el 100 % de su volumen; apoyo: Maughan et al., Am J Clin Nutr 2016 (café, té y otras bebidas habituales no se diferenciaron del agua en la orina producida; hombres jóvenes, 1 L por toma; leche y soluciones de rehidratación retuvieron más); alcohol y sopa se registran pero no suman (decisión de diseño del proyecto, no norma); sin verificar con búsqueda: el alcance exacto de lo que EFSA clasifica como alimento
+- [stated] asked to remember: 2026-10-26 la pantalla Calorías y gasto muestra con qué datos del perfil se calcula (sexo, edad, estatura, peso, actividad), la fórmula de Mifflin–St Jeor con los números del usuario, los factores de actividad (convencionales, aproximados) y los cinco pasos de la meta de líquidos
+
+================
+File: memoria-prototipo/app-hidratacion-trazabilidad.md
+================
+---
+name: app-hidratacion-trazabilidad
+description: Bitácora de HidraMetric (v0.1 a v1.4.0, oct-2026): prototipo, Vercel, licencia MIT, consejos entre tomas y libro de beneficios.
+sources: [chat]
+aliases: [bitácora hidrametric, historial hidrametric, trazabilidad hidratación]
+---
+
+- [stated] asked to remember: 2026-10-21 v0.1 — partió de repomix_comprimido.txt (Repomix comprimido con pérdida, prototipo AQUANÖMIC); como el código original no era recuperable, se reconstruyó a partir de su documentación y se reescribió como HidraMetric en un único HTML
+- [stated] asked to remember: v0.1 — correcciones al original: el reloj mostraba 0 a las 12 PM; se quitó el Service Worker creado con Blob (los navegadores no lo aceptan); se eliminó el consejo sobre "filtración glomerular matutina" por no tener respaldo
+- [stated] asked to remember: v0.2 — perfil, plan y base científica pasaron a desplegables con el nivel de hidratación como protagonista; el botón Reiniciar no respondía porque usaba confirm() del navegador y se reemplazó por un modal propio
+- [stated] asked to remember: v0.2b — alarmas aprobadas por el usuario: editor de horarios por toma (hora, ml, activar o desactivar, añadir, quitar, restablecer automático), alarma con la app abierta (sonido, vibración, notificación) y exportación .ics con alarma diaria; limitación: sin la app abierta solo suena vía calendario
+- [stated] asked to remember: v0.3 — rediseño según captura del usuario: Inicio con vaso animado que se llena, barra superior (menú, título, reloj, tema), barra inferior (Home, Tomas, Alarmas, Perfil, Compartir), menú lateral (incluye Calorías y gasto, Base científica, Acerca de) y compartir con Web Share
+- [stated] asked to remember: entregable actual hidrametric.html (~31 KB, un solo archivo); datos guardados en localStorage con clave hidrametric.v2
+- [stated] asked to remember: ideas no incluidas aún: historial semanal, rachas, logros, recordatorios por clima, déficit o superávit calórico
+- [stated] termina la etapa de prototipo; sigue generar el código oficial listo para GitHub y despliegue en Vercel
+- [stated] asked to remember: estructura prevista para esa etapa: index.html, styles.css, app.js, README y manifiesto PWA
+- [stated] asked to remember: 2026-10-21 v1.0.0 — inicia la fase oficial: proyecto de varios archivos (index.html, css/styles.css, js/app.js, sw.js, manifest.webmanifest, icons/, vercel.json, README, CHANGELOG, docs/memoria-prototipo) entregado como hidrametric-app.zip para GitHub y Vercel; se añadió PWA (instalable, sin conexión) y cabeceras de seguridad; licencia pendiente de definir
+- [stated] 2026-10-21: HidraMetric v1.0.0 desplegada en Vercel en https://hidrametric.vercel.app/
+- [stated] 2026-10-21 v1.0.1 — licencia elegida: MIT; pidió pasar los botones de registro (círculo rojo de su captura) a una barra de acciones tipo tab bar como la barra inferior; entregado en hidrametric-app.zip actualizado
+- [stated] 2026-10-21 v1.1.0 (en curso) — el usuario pidió: (1) notificaciones aleatorias con el contenido de notificaciones_hidratacion.json, programadas entre cada toma hasta la última y solo dentro del horario de despertar y dormir, sin saturar ni ser invasivas; (2) una sección en el menú hamburguesa con beneficios_hidratacion.json presentada como libro didáctico, con migas de pan para que el usuario llegue a leerla
+- [stated] asked to remember: v1.1.0 entregada en hidrametric-app.zip: libro didáctico (js/libro.js, índice, páginas, progreso, tarjeta "Sabías que…" en Inicio, etiqueta NUEVO en el menú), consejos entre tomas (js/avisos.js: 3 al día por defecto, sin repetir, solo dentro del horario, aviso en la app, notificación del sistema y .ics de 14 días) y contenido en data/*.json; no son push de servidor, con la app cerrada no se garantiza la entrega; se matizó la redacción de afirmaciones con evidencia limitada (originales en docs/fuentes-originales/)
+- [stated] 2026-10-23 v1.1.1 — el usuario compartió captura de la portada del libro de beneficios, que se veía en columnas con el texto cortado (la regla global de header la ponía en fila); se corrigió con una portada centrada con icono y adorno; entregado en hidrametric-app.zip
+- [stated] 2026-10-25 v1.2.0 — el usuario reportó que al cambiar un dato del perfil no se actualizaban los datos, y pidió sustituir el vaso principal por una botella como la de su imagen de referencia; causa del fallo: desde v1.1.0 la función leer() de js/libro.js pisaba a leer() del perfil en js/app.js (renombrada a leerPag); nueva botella blanca sobre fondo azul con marcadores de consumido y de meta prevista a la hora actual, mensaje de ánimo y panel Faltan/Meta; aviso en Alarmas cuando hay plan personalizado; entregado en hidrametric-app.zip
+- [stated] 2026-10-25 v1.3 (en evaluación) — el usuario compartió dos capturas de referencia (registro de otras bebidas con tipos, cantidad, fecha, hora y teclado numérico; gráfico de dona por tipo de bebida) y pidió incorporar el registro de otras bebidas habituales (café, té, sopa y más) además del agua; pidió verificar si la base de cálculo ya las incluye y que se le pregunte antes de continuar si algo no está claro
+- [stated] 2026-10-25 decisiones para v1.3.0: respondió «1» a las tres preguntas (se interpretó como la primera opción de cada una): las bebidas sin alcohol suman el 100 % del volumen a la meta; el alcohol se registra pero no suma; sopas y caldos se registran aparte como alimento y no suman; alcance: solo registro por tipo, cantidad y hora (sin dona ni historial semanal por ahora)
+- [stated] asked to remember: v1.3.0 entregada en hidrametric-app.zip: botón Bebidas con ventana inferior (11 tipos, teclado numérico, atajos 150/250/330/500 ml, hora editable no futura), js/bebidas.js, lista Registro de hoy con opción de quitar, regla de suma según lo decidido (sin alcohol 100 % del volumen; alcohol y sopa se registran pero no suman) y nota en Base científica (EFSA agua total y Maughan 2016); los registros antiguos sin tipo cuentan como agua; probada en navegador real (Playwright) sin errores
+- [stated] 2026-10-25 v1.4 (en curso) — el usuario pidió: (1) en Calorías y gasto, explicar a qué se refiere cada cifra y de dónde sale el cálculo, dejando claro que usa los datos de su perfil; (2) identidad personal en el perfil (nombre o seudónimo, avatar y foto) con el nombre visible en la pantalla principal para estimular el cumplimiento de metas
+- [stated] asked to remember: v1.4.0 entregada en hidrametric-app.zip: Calorías y gasto explica BMR y TDEE, muestra los datos del perfil usados, la fórmula con los números del usuario, su nivel de actividad resaltado y los pasos de la meta de líquidos; identidad en Perfil (nombre o seudónimo, 16 avatares emoji o foto recortada a 160 px, guardada solo en el dispositivo en js/identidad.js) visible en el saludo de Inicio, el menú lateral y los mensajes de la botella; probada en navegador real sin errores
+
+================
+File: memoria-prototipo/app-hidratacion.md
+================
+---
+name: app-hidratacion
+description: Proyecto HidraMetric (antes AQUANÖMIC): app web de hidratación v1.4.0 en Vercel (hidrametric.vercel.app), licencia MIT; ver trazabilidad.
+sources: [chat]
+aliases: [App_de_hidratacion_inteligente, app de hidratación, hidratación inteligente, HidraMetric, hidrametric.html, AQUANÖMIC]
+---
+
+- [stated] proyecto "App_de_hidratacion_inteligente": quiere llevar el prototipo existente a nivel superior/premium/senior, con información validada, fórmulas comprobadas y datos científicamente respaldados
+- [stated] quiere evaluar el nombre de la app para que sea coherente, adaptado y profesionalmente correcto, y que hable por su contenido
+- [stated] formato de salida pedido: código mejorado en un único archivo
+- [stated] restricciones: usar solo el contenido adjunto (repomix_comprimido.txt), no suponer archivos inexistentes, preguntar si falta información, no cambiar comportamiento fuera de lo pedido
+- [stated] nombre elegido para la app: HidraMetric (archivo hidrametric.html); quiere perfil, plan y base científica en desplegables con el nivel de hidratación del día como protagonista
+- [stated] quiere que la app, descargada en el celular, active alarmas en las horas del plan de tomas, con horarios personalizables
+- [stated] aprobó implementar alarmas en la app (horarios editables, aviso en pantalla) más exportación de alarmas a calendario (.ics); tras esto termina la etapa de prototipo y pasará a código listo para GitHub y despliegue en Vercel
+- [stated] asked to remember: estado al 2026-10-21: prototipo v0.3 completo en hidrametric.html (vista Inicio con vaso animado, barras superior e inferior, menú lateral, alarmas, exportación .ics); detalle en [[app-hidratacion-trazabilidad]] y [[app-hidratacion-base-cientifica]]
+- [stated] asked to remember: estado al 2026-10-26: v1.4.0 entregada en hidrametric-app.zip (proyecto de varios archivos para GitHub y Vercel: botella principal, registro de bebidas, libro de beneficios, consejos entre tomas, calorías explicadas e identidad personal); pendiente de decidir: historial semanal, notificaciones push reales con servidor, titular del copyright en LICENSE
+
+
+
+
+
+================================================================
+End of Codebase
+================================================================

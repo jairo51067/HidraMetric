@@ -37,6 +37,12 @@ En Vercel: **Add New → Project →** importar el repositorio. *Framework Prese
 - **Android (Chrome):** menú lateral → *Instalar app*.
 - **iPhone (Safari):** Compartir → *Añadir a pantalla de inicio*.
 
+## Clima
+Junto a la hora aparece la temperatura y el estado del tiempo. Es opcional: al tocar "Ver clima" la app explica el uso de la ubicación y pide permiso. Las coordenadas se redondean a ~1 km, se envían a [Open-Meteo](https://open-meteo.com) (gratuito, sin clave, para uso no comercial) y se guardan solo en el dispositivo. Se puede quitar desde el mismo botón. En `vercel.json` la política CSP permite `connect-src` a `https://api.open-meteo.com`.
+
+## Iconos
+Los iconos de la interfaz son SVG de línea propios (símbolos en `index.html`, sin dependencias ni licencias externas). Los emojis se conservan en tipos de bebida, avatares y clima.
+
 ## Identidad y estimación de calorías
 En **Perfil** se puede indicar un nombre o seudónimo y elegir un avatar o subir una foto (se recorta y reduce a 160 px en el propio dispositivo; no se envía a ningún servidor). El nombre aparece en el saludo de Inicio, en el menú lateral y en los mensajes de ánimo de la botella. **Calorías y gasto** muestra con qué datos del perfil se calcula cada cifra (BMR de Mifflin–St Jeor, TDEE por factor de actividad) y cómo se llega a la meta de líquidos.
 
