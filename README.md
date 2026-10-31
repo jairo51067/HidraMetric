@@ -37,6 +37,12 @@ En Vercel: **Add New → Project →** importar el repositorio. *Framework Prese
 - **Android (Chrome):** menú lateral → *Instalar app*.
 - **iPhone (Safari):** Compartir → *Añadir a pantalla de inicio*.
 
+## Historial y almacenamiento
+El historial de tomas vive en IndexedDB (`js/almacen.js`), con respaldo automático en localStorage si el navegador no la ofrece. La configuración pequeña (perfil, tema, plan de tomas) sigue en localStorage. Diseño, límites, esquema, retención y guía de migración: [`docs/almacenamiento.md`](docs/almacenamiento.md). La copia de seguridad se exporta e importa desde **Acerca de → Tus datos**.
+
+## Guía de medidas
+Infografía de referencia (`js/medidas.js`) con escala métrica, medidas del hogar, sistemas anglosajones, conversor y la meta del usuario expresada en vasos, botellas y onzas. Se abre desde el menú lateral o desde el registro de bebidas.
+
 ## Clima
 Junto a la hora aparece la temperatura y el estado del tiempo. Es opcional: al tocar "Ver clima" la app explica el uso de la ubicación y pide permiso. Las coordenadas se redondean a ~1 km, se envían a [Open-Meteo](https://open-meteo.com) (gratuito, sin clave, para uso no comercial) y se guardan solo en el dispositivo. Se puede quitar desde el mismo botón. En `vercel.json` la política CSP permite `connect-src` a `https://api.open-meteo.com`.
 

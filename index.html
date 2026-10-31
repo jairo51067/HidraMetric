@@ -34,10 +34,11 @@
 <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.5 3.5h5M10.5 3.5v5.8L5 18.5a1.8 1.8 0 0 0 1.6 2.7h10.8A1.8 1.8 0 0 0 19 18.5l-5.5-9.2V3.5"/><path d="M7.5 15h9"/></symbol>
 <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.2M12 7.8v.1"/></symbol>
 <symbol id="i-install" viewBox="0 0 24 24"><path d="M12 4v11M8 11l4 4 4-4M5 19.5h14"/></symbol>
+<symbol id="i-ruler" viewBox="0 0 24 24"><rect x="2.5" y="8" width="19" height="8" rx="1.8"/><path d="M6.5 8v3M10.5 8v4.5M14.5 8v3M18 8v4.5"/></symbol>
 </defs></svg>
 <header class="top"><button class="ico" id="menuBtn" aria-label="Menú"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button><h1>HidraMetric</h1><div class="clock" id="clockBox"><span id="clock">--:--:--</span><button class="wx" id="wx" aria-label="Clima">Ver clima</button></div><button class="ico" id="themeBtn" aria-label="Cambiar tema"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg></button></header>
 <div id="drawer"><div class="pn"><div class="dwh"><span class="av sm" id="dwAv"></span><div><h3>HidraMetric</h3><small id="dwNom"></small></div></div>
-<button class="di" data-go="home"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg> Inicio</button><button class="di" data-go="tomas"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg> Plan de tomas</button><button class="di" data-go="alarmas"><svg class="ic" aria-hidden="true"><use href="#i-alarm"/></svg> Alarmas y horarios</button><button class="di" data-go="perfil"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg> Perfil y requerimiento</button><button class="di" data-go="calorias"><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg> Calorías y gasto</button><button class="di" data-go="libro"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg> Beneficios de hidratarte <span class="nw" id="nwDot" hidden>NUEVO</span></button><button class="di" data-go="base"><svg class="ic" aria-hidden="true"><use href="#i-flask"/></svg> Base científica</button><button class="di" data-share><svg class="ic" aria-hidden="true"><use href="#i-share"/></svg> Compartir app</button><button class="di" id="installBtn" hidden><svg class="ic" aria-hidden="true"><use href="#i-install"/></svg> Instalar app</button><button class="di" data-go="acerca"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg> Acerca de</button></div><div class="sc" id="scrim"></div></div>
+<button class="di" data-go="home"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg> Inicio</button><button class="di" data-go="tomas"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg> Plan de tomas</button><button class="di" data-go="alarmas"><svg class="ic" aria-hidden="true"><use href="#i-alarm"/></svg> Alarmas y horarios</button><button class="di" data-go="perfil"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg> Perfil y requerimiento</button><button class="di" data-go="calorias"><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg> Calorías y gasto</button><button class="di" data-go="medidas"><svg class="ic" aria-hidden="true"><use href="#i-ruler"/></svg> Guía de medidas</button><button class="di" data-go="libro"><svg class="ic" aria-hidden="true"><use href="#i-book"/></svg> Beneficios de hidratarte <span class="nw" id="nwDot" hidden>NUEVO</span></button><button class="di" data-go="base"><svg class="ic" aria-hidden="true"><use href="#i-flask"/></svg> Base científica</button><button class="di" data-share><svg class="ic" aria-hidden="true"><use href="#i-share"/></svg> Compartir app</button><button class="di" id="installBtn" hidden><svg class="ic" aria-hidden="true"><use href="#i-install"/></svg> Instalar app</button><button class="di" data-go="acerca"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg> Acerca de</button></div><div class="sc" id="scrim"></div></div>
 <main class="app"><section id="v-home"><div class="hi"><button class="av" id="hiAv" data-go="perfil" aria-label="Abrir perfil"></button><div><div class="hi1" id="hi1">Hola</div><div class="hi2" id="hi2"></div></div></div><div class="abar" role="toolbar" aria-label="Registrar consumo"><button data-add="250"><i><svg class="ic" aria-hidden="true"><use href="#i-drop"/></svg></i>+250 ml</button><button data-add="300"><i><svg class="ic" aria-hidden="true"><use href="#i-glass"/></svg></i>+300 ml</button><button id="customBtn"><i><svg class="ic" aria-hidden="true"><use href="#i-coffee"/></svg></i>Bebidas</button><button id="undoBtn"><i><svg class="ic" aria-hidden="true"><use href="#i-undo"/></svg></i>Deshacer</button><button id="resetBtn" class="rs"><i><svg class="ic" aria-hidden="true"><use href="#i-reset"/></svg></i>Reiniciar</button></div>
 <div class="banner" id="banner" role="alert"><span id="bannerTxt"></span><button class="btn o" style="padding:4px 8px;font-size:.75rem" id="moreBtn">Saber más</button></div><section class="card hero"><div class="hb">
 <svg id="bottle" viewBox="0 0 360 310" role="img" aria-label="Botella que se llena con tu consumo de agua">
@@ -103,7 +104,13 @@
   </ul>
  <p class="note">Herramienta informativa para adultos sanos de 18 años o más. No sustituye el consejo médico; con enfermedad renal, cardíaca, hepática o tratamientos que alteren el equilibrio de líquidos, siga las indicaciones de su médico.</p>
 </div></section><section id="v-libro" hidden><div id="libroBox"></div></section>
-<section id="v-acerca" hidden><h2 class="vt">Acerca de</h2><div class="card"><p class="note" style="font-size:.9rem"><b>HidraMetric</b> · v1.5.0<br><br>Planificador de hidratación que calcula tu meta diaria con referencias de EFSA y la ecuación de Mifflin–St Jeor, reparte las tomas durante el día y te avisa con alarmas. Tus datos se guardan solo en este dispositivo.<br><br>Herramienta informativa; no sustituye el consejo médico.</p></div></section></main>
+<section id="v-medidas" hidden><div id="medidasBox"></div></section>
+<section id="v-acerca" hidden><h2 class="vt">Acerca de</h2><div class="card"><p class="note" style="font-size:.9rem"><b>HidraMetric</b> · v1.6.0<br><br>Planificador de hidratación que calcula tu meta diaria con referencias de EFSA y la ecuación de Mifflin–St Jeor, reparte las tomas durante el día y te avisa con alarmas. Tus datos se guardan solo en este dispositivo.<br><br>Herramienta informativa; no sustituye el consejo médico.</p></div>
+<div class="card" style="margin-top:14px"><h2>Tus datos</h2>
+<p class="note" id="stInfo" style="margin:0 0 12px">Leyendo el almacenamiento…</p>
+<div class="btns" style="justify-content:flex-start"><button class="btn o" id="stExp">Exportar copia (.json)</button><button class="btn o" id="stImp">Importar copia</button></div><input type="file" id="stIn" accept="application/json,.json" hidden>
+<p class="note">El historial se guarda solo en este dispositivo: tomas de los últimos 90 días, resumen diario de 24 meses y resumen mensual sin límite. Si cambias de teléfono o borras los datos del navegador, exporta antes una copia.</p></div>
+</section></main>
 <noscript><p style="padding:16px">HidraMetric necesita JavaScript.</p></noscript>
 <div class="sheet" id="sheet"><div class="sp" role="dialog" aria-modal="true" aria-label="Registrar bebida">
 <div class="sh-top"><h3>Registrar bebida</h3><button class="ico" id="shX" aria-label="Cerrar">✕</button></div>
@@ -111,17 +118,21 @@
 <div class="chips" id="shTipos"></div><div class="sh-note" id="shNote" hidden></div>
 <div class="sh-when"><span>Hoy a las</span><input type="time" id="shTime"></div>
 <div class="sh-q"><button data-q="150">150</button><button data-q="250">250</button><button data-q="330">330</button><button data-q="500">500</button></div>
+<div style="text-align:center;margin:-2px 0 8px"><button class="lnk" data-go="medidas">¿Cuánto es un vaso? Guía de medidas</button></div>
 <div class="pad"><button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button data-k="00">00</button><button data-k="0">0</button><button data-k="<" aria-label="Borrar">⌫</button></div>
 <div class="err-msg" id="shErr"></div><button class="btn" id="shAdd" style="width:100%;margin-top:12px">Añadir</button></div></div>
 <div class="toast" id="toast" hidden role="status"></div>
 <nav class="bot"><button data-go="home" class="act"><i><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg></i>Home</button><button data-go="tomas"><i><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></i>Tomas</button><button data-go="alarmas"><i><svg class="ic" aria-hidden="true"><use href="#i-alarm"/></svg></i>Alarmas</button><button data-go="perfil"><i><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg></i>Perfil</button><button data-share><i><svg class="ic" aria-hidden="true"><use href="#i-share"/></svg></i>Compartir</button></nav>
 <div class="ov" id="ov"><div class="mc" role="dialog" aria-modal="true"><h3 id="mt"></h3><div id="mb"></div><button class="btn" style="width:100%" id="mx">Entendido</button></div></div>
 
+<script src="js/almacen.js" defer></script>
 <script src="js/app.js" defer></script>
 <script src="js/libro.js" defer></script>
 <script src="js/avisos.js" defer></script>
 <script src="js/bebidas.js" defer></script>
 <script src="js/identidad.js" defer></script>
 <script src="js/clima.js" defer></script>
+<script src="js/medidas.js" defer></script>
+<script src="js/datos.js" defer></script>
 </body>
 </html>

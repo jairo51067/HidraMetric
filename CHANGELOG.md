@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.0 — 2026-10-27
+- Almacén local del historial en IndexedDB (tomas 90 días, resumen diario 24 meses, resumen mensual sin límite), con respaldo en localStorage, escritura atómica, resúmenes autorreparables, consultas por día, semana y mes, compactación, migración desde el formato anterior y copia de seguridad (exportar e importar). Ver `docs/almacenamiento.md`.
+- Guía de medidas de líquidos (infografía): escala métrica, medidas del hogar, sistemas anglosajones, conversor y meta en medidas.
+- Sección "Tus datos" en Acerca de.
+
 ## 1.5.0 — 2026-10-27
 - La barra de acciones (+250, +300, Bebidas, Deshacer, Reiniciar) pasa encima de la botella: lo primero al abrir Inicio es decidir qué registrar.
 - Temperatura y clima actuales junto a la hora (Open-Meteo; solo con permiso de ubicación, opcional y revocable).

@@ -16,6 +16,7 @@ $('customBtn').onclick=abrirSheet;$('shX').onclick=cerrarSheet;
 $('sheet').addEventListener('click',e=>{
  if(e.target===$('sheet'))return cerrarSheet();
  const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+ if(d.go)return cerrarSheet();
  if(d.tipo){SH.tipo=d.tipo;return pintarSheet()}
  if(d.q){SH.txt=d.q;return pintarSheet()}
  if(d.k!==undefined){
@@ -40,5 +41,5 @@ function renderHoy(){
   return '<div class="hr"><span class="hh">'+pad2(d.getHours())+':'+pad2(d.getMinutes())+'</span><span class="gr">'+T[1]+' '+T[0]+'</span><span class="hm">'+x.ml+' ml</span>'+(T[2]?'':'<em>no suma</em>')+'<button data-rm="'+i+'" aria-label="Quitar registro">✕</button></div>'}).join('')
   +(it.length>8?'<p class="note" style="margin:8px 0 0">+ '+(it.length-8)+' registros anteriores</p>':'');
 }
-$('hoyList').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(!b)return;log.items.splice(+b.dataset.rm,1);save();render()});
+$('hoyList').addEventListener('click',e=>{const b=e.target.closest('[data-rm]');if(!b)return;const x=log.items.splice(+b.dataset.rm,1)[0];if(x&&x.id)ALM.quitar(x.id).catch(()=>{});save();render()});
 renderHoy();

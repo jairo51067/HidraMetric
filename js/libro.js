@@ -42,7 +42,7 @@ function teaser(){
  el.hidden=false;el.dataset.cap=c.id;el.dataset.pp=i;
  el.innerHTML='<h4>📖 Sabías que…</h4><div class="big">'+esc(t.titulo)+'</div><p>'+esc(f.length>150?f.slice(0,147)+'…':f)+'</p><div class="mini"><i style="width:'+Math.round(done/n*100)+'%"></i></div><small><span>Leer más →</span><span>'+done+'/'+n+' capítulos</span></small>';
 }
-function onView(v){if(v==='libro'&&LIB)indice();if(v==='home')teaser()}
+function onView(v){if(v==='libro'&&LIB)indice();if(v==='home')teaser();if(v==='medidas'&&typeof pintarMedidas==='function')pintarMedidas()}
 function ruta(){
  const m=location.hash.match(/^#libro-?(.*)$/);if(!m)return;
  try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
