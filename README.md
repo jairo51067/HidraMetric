@@ -37,6 +37,11 @@ En Vercel: **Add New → Project →** importar el repositorio. *Framework Prese
 - **Android (Chrome):** menú lateral → *Instalar app*.
 - **iPhone (Safari):** Compartir → *Añadir a pantalla de inicio*.
 
+## Historial, sonidos y presentación
+- **Historial** (`js/historial.js`): una sola tubería lee solo el periodo visible del almacén (`ALM.dia`, `ALM.tomasDe`, `ALM.semana`, `ALM.mes`) y lo dibuja en cinco secciones fijas: selector de periodo, resumen, gráfico, desglose por bebida y detalle. Se abre desde el menú lateral o desde «Registro de hoy».
+- **Sonidos** (`js/sonido.js`): generados con Web Audio; primera toma del día y meta cumplida, una vez al día cada uno (las banderas se guardan con el día). Interruptor en Alarmas.
+- **Presentación** (`js/intro.js` + CSS): se muestra una vez por sesión del navegador; la animación es CSS puro y no retrasa el arranque de la app.
+
 ## Historial y almacenamiento
 El historial de tomas vive en IndexedDB (`js/almacen.js`), con respaldo automático en localStorage si el navegador no la ofrece. La configuración pequeña (perfil, tema, plan de tomas) sigue en localStorage. Diseño, límites, esquema, retención y guía de migración: [`docs/almacenamiento.md`](docs/almacenamiento.md). La copia de seguridad se exporta e importa desde **Acerca de → Tus datos**.
 

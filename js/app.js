@@ -3,8 +3,8 @@ const K='hidrametric.v2';
 let custom=null,perfil=null,ULT=null,LEGACY=null,meta=0,log={fecha:hoy(),items:[]};
 function hoy(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
 function load(){try{const s=JSON.parse(localStorage.getItem(K)||'{}');if(s.perfil)for(const k in s.perfil){const e=$(k);if(e)e.value=s.perfil[k]}
- if(s.log){if(s.log.items&&s.log.items.length)LEGACY=s.log;if(s.log.fecha===hoy())log.fired=s.log.fired||[]}custom=s.custom||null;$('alOn').checked=!!s.alOn;$('themeBtn')&&setTheme(s.tema||'light')}catch(e){setTheme('light')}}
-function save(){try{localStorage.setItem(K,JSON.stringify({perfil:perfil||leer(),log:LEGACY||{fecha:log.fecha,fired:log.fired||[]},custom,alOn:$('alOn').checked,tema:document.documentElement.dataset.theme}))}catch(e){}}
+ if(s.log){if(s.log.items&&s.log.items.length)LEGACY=s.log;if(s.log.fecha===hoy()){log.fired=s.log.fired||[];log.snd=s.log.snd||{}}}custom=s.custom||null;$('alOn').checked=!!s.alOn;$('themeBtn')&&setTheme(s.tema||'light')}catch(e){setTheme('light')}}
+function save(){try{localStorage.setItem(K,JSON.stringify({perfil:perfil||leer(),log:LEGACY||{fecha:log.fecha,fired:log.fired||[],snd:log.snd||{}},custom,alOn:$('alOn').checked,tema:document.documentElement.dataset.theme}))}catch(e){}}
 function leer(){const o={};['sexo','edad','estatura','peso','act','clima','estado','desp','dorm'].forEach(k=>o[k]=$(k).value);return o}
 function setTheme(t){document.documentElement.dataset.theme=t;$('themeBtn').innerHTML='<svg class="ic" aria-hidden="true"><use href="#i-'+(t==='light'?'moon':'sun')+'"/></svg>'}
 function modal(t,b,lbl){$('mx').textContent=lbl||'Entendido';$('mt').textContent=t;$('mb').innerHTML='<p>'+b+'</p>';$('ov').classList.add('on')}
@@ -38,7 +38,11 @@ function add(ml,tipo,ts){
  if(!perfil){modal('Perfil incompleto','Corrija los datos del perfil antes de registrar.');return}
  if(log.fecha!==hoy())log={fecha:hoy(),items:[]};
  const T0=ts||Date.now(),it={id:ALM.nuevoId(T0),t:T0,ml,tipo:tipo||'agua'},now=Date.now(),rec=log.items.filter(i=>cuenta(i)&&now-i.t<36e5).reduce((s,i)=>s+i.ml,0)+(cuenta(it)?ml:0);
- log.items.push(it);save();render();
+ const antes=total();log.items.push(it);
+ if(cuenta(it)){log.snd=log.snd||{};const cruza=meta>0&&antes<meta&&total()>=meta;
+  if(cruza&&!log.snd.meta){log.snd.meta=1;log.snd.primera=1;typeof SND!=='undefined'&&SND.exito('meta')}
+  else if(antes===0&&!log.snd.primera){log.snd.primera=1;typeof SND!=='undefined'&&SND.exito('primera')}}
+ save();render();
  ALM.registrar({...it,c:cuenta(it)?1:0},meta).catch(()=>modal('No se pudo guardar en el historial','El registro se ve en pantalla, pero el navegador no pudo guardarlo en este dispositivo. Exporta una copia desde Acerca de, libera espacio e inténtalo de nuevo.'));
  if(!cuenta(it))return;
  if(rec>1000)modal('Ritmo de ingesta elevado','Ha registrado '+rec+' ml en la última hora. La capacidad renal de excretar agua es de orientativamente 0,8–1 L/h; superarla de forma sostenida aumenta el riesgo de hiponatremia dilucional. Espaciar las tomas.');
@@ -46,7 +50,7 @@ function add(ml,tipo,ts){
 document.addEventListener('click',e=>{const b=e.target.closest('[data-add]');if(b){if(b.id==='alReg')$('ov').classList.remove('on');add(+b.dataset.add)}});
 $('undoBtn').onclick=()=>{const x=log.items.pop();if(x&&x.id)ALM.quitar(x.id).catch(()=>{});save();render()};
 $('resetBtn').onclick=()=>modal('Reiniciar consumo','Se borrarán los registros de hoy ('+total()+' ml). Esta acción no se puede deshacer.<br><br><button class="btn d" style="width:100%" id="rok">Sí, reiniciar</button>','Cancelar');
-document.addEventListener('click',e=>{if(e.target.id==='rok'){log.items=[];ALM.borrarDia(ALM.fecha(Date.now())).catch(()=>{});save();$('ov').classList.remove('on');render()}});
+document.addEventListener('click',e=>{if(e.target.id==='rok'){log.items=[];log.snd={};ALM.borrarDia(ALM.fecha(Date.now())).catch(()=>{});save();$('ov').classList.remove('on');render()}});
 $('moreBtn').onclick=()=>{const p=meta?total()/meta:0;modal(p>1.15?'Alerta de sobrehidratación':'Meta superada','Superar la meta no aporta beneficio adicional demostrado en personas sanas; la sed es una guía fiable para ajustar el resto del día. Por encima del 115 % se recomienda detener la ingesta de líquidos.')};
 
 /* Ml que el plan prevé haber bebido hasta este momento (marcador derecho de la botella). */
@@ -71,7 +75,7 @@ function render(){
  $('exc').textContent=meta&&ml>meta?'Exceso: +'+(ml-meta)+' ml':'';
  const b=$('banner');b.className='banner'+(cls?' on '+cls:'');$('bannerTxt').textContent=bn;
  m=m.replace('{n}',typeof nomUsuario==='function'&&nomUsuario()?', '+nomUsuario():'');$('msg').textContent=m;
- if(typeof renderHoy==='function')renderHoy();if(typeof pintarId==='function')pintarId();timeline()}
+ if(typeof renderHoy==='function')renderHoy();if(typeof pintarId==='function')pintarId();if(typeof refrescarHistorial==='function')refrescarHistorial();timeline()}
 
 /* ===== Plan de tomas (automático o personalizado) ===== */
 const mins=t=>{const [h,m]=t.split(':');return +h*60+ +m};
@@ -141,7 +145,7 @@ function exportIcs(){
 $('icsBtn').onclick=exportIcs;
 
 /* ===== Navegación, menú y compartir ===== */
-const VIEWS=['home','tomas','alarmas','perfil','calorias','base','acerca','libro','medidas'];
+const VIEWS=['home','tomas','alarmas','perfil','calorias','base','acerca','libro','medidas','historial'];
 function go(v){VIEWS.forEach(x=>$('v-'+x).hidden=x!==v);document.querySelectorAll('nav.bot [data-go]').forEach(b=>b.classList.toggle('act',b.dataset.go===v));$('drawer').classList.remove('on');scrollTo(0,0);if(typeof onView==='function')onView(v)}
 $('menuBtn').onclick=()=>$('drawer').classList.add('on');$('scrim').onclick=()=>$('drawer').classList.remove('on');
 document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)go(g.dataset.go);if(e.target.closest('[data-share]')){$('drawer').classList.remove('on');compartir()}});

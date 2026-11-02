@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.0 — 2026-10-31
+- Corregido: el sprite de iconos (invisible) ocupaba 130 × 250 px en la esquina superior izquierda por una regla de estilos antigua y podía capturar toques desde la v1.5.0; ahora mide 0 × 0 y no recibe eventos.
+- Pantalla de **Historial** (menú lateral y enlace en «Registro de hoy»): día, semana y mes sobre las consultas del almacén, con resumen, gráfico (anillo, barras con meta y calendario de cumplimiento), desglose por bebida y detalle.
+- **Sonido de éxito** (Web Audio, sin archivos): al registrar la primera toma del día y al cumplir la meta, una vez al día cada uno, con interruptor en Alarmas.
+- **Presentación de entrada**: el nombre HidraMetric se llena de agua; una vez por sesión, se salta con un toque y respeta «reducir movimiento».
+
 ## 1.6.0 — 2026-10-27
 - Almacén local del historial en IndexedDB (tomas 90 días, resumen diario 24 meses, resumen mensual sin límite), con respaldo en localStorage, escritura atómica, resúmenes autorreparables, consultas por día, semana y mes, compactación, migración desde el formato anterior y copia de seguridad (exportar e importar). Ver `docs/almacenamiento.md`.
 - Guía de medidas de líquidos (infografía): escala métrica, medidas del hogar, sistemas anglosajones, conversor y meta en medidas.
