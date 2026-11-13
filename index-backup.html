@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Planificador de hidratación basado en evidencia (EFSA, Mifflin–St Jeor)"
+    />
+    <meta name="theme-color" content="#0284c7" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="HidraMetric" />
+    <title>HidraMetric · Planificador de hidratación basado en evidencia</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="splash" id="splash" aria-hidden="true">
+      <div class="sp-in">
+        <svg class="sp-drop" viewBox="0 0 24 24"><use href="#i-drop" /></svg>
+        <svg class="sp-name" viewBox="0 0 340 90">
+          <defs>
+            <clipPath id="spc">
+              <text
+                x="170"
+                y="66"
+                text-anchor="middle"
+                textLength="320"
+                lengthAdjust="spacingAndGlyphs"
+                font-size="58"
+                font-weight="800"
+                font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif"
+              >
+                HidraMetric
+              </text>
+            </clipPath>
+          </defs>
+          <text
+            class="ol"
+            x="170"
+            y="66"
+            text-anchor="middle"
+            textLength="320"
+            lengthAdjust="spacingAndGlyphs"
+            font-size="58"
+            font-weight="800"
+            font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif"
+          >
+            HidraMetric
+          </text>
+          <g clip-path="url(#spc)">
+            <g class="sp-agua">
+              <g class="sp-o2">
+                <path
+                  d="M-160 8 Q-140 0 -120 8 T-80 8 T-40 8 T0 8 T40 8 T80 8 T120 8 T160 8 T200 8 T240 8 T280 8 T320 8 T360 8 T400 8 T440 8 T480 8 V130 H-160Z"
+                  fill="rgba(255,255,255,.55)"
+                />
+              </g>
+              <g class="sp-o1">
+                <path
+                  d="M-160 6 Q-140 14 -120 6 T-80 6 T-40 6 T0 6 T40 6 T80 6 T120 6 T160 6 T200 6 T240 6 T280 6 T320 6 T360 6 T400 6 T440 6 T480 6 V130 H-160Z"
+                  fill="#fff"
+                />
+              </g>
+            </g>
+          </g>
+        </svg>
+        <p class="sp-tag">Hidratación basada en evidencia</p>
+      </div>
+    </div>
+
+    <svg class="sprite" width="0" height="0" aria-hidden="true">
+      <defs>
+        <symbol id="i-menu" viewBox="0 0 24 24">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24">
+          <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" />
+        </symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4" />
+          <path
+            d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"
+          />
+        </symbol>
+        <symbol id="i-drop" viewBox="0 0 24 24">
+          <path
+            d="M12 3.2c3.2 3.8 6 6.9 6 10.4a6 6 0 0 1-12 0c0-3.5 2.8-6.6 6-10.4z"
+          />
+          <path d="M9.2 14.2a3 3 0 0 0 2.2 2.6" />
+        </symbol>
+        <symbol id="i-glass" viewBox="0 0 24 24">
+          <path
+            d="M6.5 3.5h11l-1.4 15.2a2 2 0 0 1-2 1.8H9.9a2 2 0 0 1-2-1.8z"
+          />
+          <path d="M7.2 10.5c1.7-1 3.3 1 5 0s3.3-1 4.6 0" />
+        </symbol>
+        <symbol id="i-coffee" viewBox="0 0 24 24">
+          <path d="M4.5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z" />
+          <path d="M15.5 10.5h1.2a2.4 2.4 0 0 1 0 4.8h-1.2" />
+          <path d="M8 3.5c0 1 1 1.3 1 2.3M12 3.5c0 1 1 1.3 1 2.3" />
+        </symbol>
+        <symbol id="i-undo" viewBox="0 0 24 24">
+          <path d="M9 7 4.5 11.5 9 16" />
+          <path d="M5 11.5h9a4.5 4.5 0 0 1 0 9h-3" />
+        </symbol>
+        <symbol id="i-reset" viewBox="0 0 24 24">
+          <path d="M4 12a8 8 0 0 1 13.7-5.6L20 8.5" />
+          <path d="M20 4v4.5h-4.5" />
+          <path d="M20 12a8 8 0 0 1-13.7 5.6L4 15.5" />
+          <path d="M4 20v-4.5h4.5" />
+        </symbol>
+        <symbol id="i-home" viewBox="0 0 24 24">
+          <path d="M3.5 11 12 3.8l8.5 7.2" />
+          <path d="M5.5 9.8V20h4.3v-5.5h4.4V20h4.3V9.8" />
+        </symbol>
+        <symbol id="i-cal" viewBox="0 0 24 24">
+          <rect x="3.5" y="5" width="17" height="15.5" rx="3" />
+          <path d="M3.5 10h17M8 3v4M16 3v4M8 14.5h2M12 14.5h2" />
+        </symbol>
+        <symbol id="i-alarm" viewBox="0 0 24 24">
+          <circle cx="12" cy="13" r="7.5" />
+          <path d="M12 9v4.2l2.6 1.6M4.5 4.5l-2 2M19.5 4.5l2 2" />
+        </symbol>
+        <symbol id="i-user" viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4.5 20.5c.6-4 3.7-6.2 7.5-6.2s6.9 2.2 7.5 6.2" />
+        </symbol>
+        <symbol id="i-share" viewBox="0 0 24 24">
+          <path d="M12 15V3.5M8 7.5l4-4 4 4" />
+          <path d="M5 12v6.5A2 2 0 0 0 7 20.5h10a2 2 0 0 0 2-2V12" />
+        </symbol>
+        <symbol id="i-flame" viewBox="0 0 24 24">
+          <path
+            d="M12 3c.5 3.5 4.5 5.5 4.5 10a4.5 4.5 0 0 1-9 0c0-1.8.8-3 1.8-4 .2 1.2.9 1.8 1.6 2 .3-3-.3-5 1.1-8z"
+          />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path
+            d="M12 6.5C10.5 5 8 4.5 4.5 4.5v13c3.5 0 6 .5 7.5 2 1.5-1.5 4-2 7.5-2v-13c-3.5 0-6 .5-7.5 2z"
+          />
+          <path d="M12 6.5v13" />
+        </symbol>
+        <symbol id="i-flask" viewBox="0 0 24 24">
+          <path
+            d="M9.5 3.5h5M10.5 3.5v5.8L5 18.5a1.8 1.8 0 0 0 1.6 2.7h10.8A1.8 1.8 0 0 0 19 18.5l-5.5-9.2V3.5"
+          />
+          <path d="M7.5 15h9" />
+        </symbol>
+        <symbol id="i-info" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8.5" />
+          <path d="M12 11v5.2M12 7.8v.1" />
+        </symbol>
+        <symbol id="i-install" viewBox="0 0 24 24">
+          <path d="M12 4v11M8 11l4 4 4-4M5 19.5h14" />
+        </symbol>
+        <symbol id="i-ruler" viewBox="0 0 24 24">
+          <rect x="2.5" y="8" width="19" height="8" rx="1.8" />
+          <path d="M6.5 8v3M10.5 8v4.5M14.5 8v3M18 8v4.5" />
+        </symbol>
+        <symbol id="i-chev-l" viewBox="0 0 24 24">
+          <path d="M14.5 6 8.5 12l6 6" />
+        </symbol>
+        <symbol id="i-chev-r" viewBox="0 0 24 24">
+          <path d="m9.5 6 6 6-6 6" />
+        </symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24">
+          <path d="M5 20v-8M12 20V5M19 20v-11" />
+          <path d="M3 20.5h18" />
+        </symbol>
+      </defs>
+    </svg>
+    <header class="top">
+      <button class="ico" id="menuBtn" aria-label="Menú">
+        <svg class="ic" aria-hidden="true"><use href="#i-menu" /></svg>
+      </button>
+      <h1>HidraMetric</h1>
+      <div class="clock" id="clockBox">
+        <span id="clock">--:--:--</span
+        ><button class="wx" id="wx" aria-label="Clima">Ver clima</button>
+      </div>
+      <button class="ico" id="themeBtn" aria-label="Cambiar tema">
+        <svg class="ic" aria-hidden="true"><use href="#i-moon" /></svg>
+      </button>
+    </header>
+    <div id="drawer">
+      <div class="pn">
+        <div class="dwh">
+          <span class="av sm" id="dwAv"></span>
+          <div>
+            <h3>HidraMetric</h3>
+            <small id="dwNom"></small>
+          </div>
+        </div>
+        <button class="di" data-go="home">
+          <svg class="ic" aria-hidden="true"><use href="#i-home" /></svg>
+          Inicio</button
+        ><button class="di" data-go="tomas">
+          <svg class="ic" aria-hidden="true"><use href="#i-cal" /></svg> Plan de
+          tomas</button
+        ><button class="di" data-go="alarmas">
+          <svg class="ic" aria-hidden="true"><use href="#i-alarm" /></svg>
+          Alarmas y horarios</button
+        ><button class="di" data-go="perfil">
+          <svg class="ic" aria-hidden="true"><use href="#i-user" /></svg> Perfil
+          y requerimiento</button
+        ><button class="di" data-go="calorias">
+          <svg class="ic" aria-hidden="true"><use href="#i-flame" /></svg>
+          Calorías y gasto</button
+        ><button class="di" data-go="historial">
+          <svg class="ic" aria-hidden="true"><use href="#i-chart" /></svg>
+          Historial</button
+        ><button class="di" data-go="medidas">
+          <svg class="ic" aria-hidden="true"><use href="#i-ruler" /></svg> Guía
+          de medidas</button
+        ><button class="di" data-go="libro">
+          <svg class="ic" aria-hidden="true"><use href="#i-book" /></svg>
+          Beneficios de hidratarte
+          <span class="nw" id="nwDot" hidden>NUEVO</span></button
+        ><button class="di" data-go="base">
+          <svg class="ic" aria-hidden="true"><use href="#i-flask" /></svg> Base
+          científica</button
+        ><button class="di" data-share>
+          <svg class="ic" aria-hidden="true"><use href="#i-share" /></svg>
+          Compartir app</button
+        ><button class="di" id="installBtn" hidden>
+          <svg class="ic" aria-hidden="true"><use href="#i-install" /></svg>
+          Instalar app</button
+        ><button class="di" data-go="acerca">
+          <svg class="ic" aria-hidden="true"><use href="#i-info" /></svg> Acerca
+          de
+        </button>
+      </div>
+      <div class="sc" id="scrim"></div>
+    </div>
+    <main class="app">
+      <section id="v-home">
+        <div class="hi">
+          <button
+            class="av"
+            id="hiAv"
+            data-go="perfil"
+            aria-label="Abrir perfil"
+          ></button>
+          <div>
+            <div class="hi1" id="hi1">Hola</div>
+            <div class="hi2" id="hi2"></div>
+          </div>
+        </div>
+        <div class="abar" role="toolbar" aria-label="Registrar consumo">
+          <button data-add="250">
+            <i
+              ><svg class="ic" aria-hidden="true">
+                <use href="#i-drop" /></svg></i
+            >+250 ml</button
+          ><button data-add="300">
+            <i
+              ><svg class="ic" aria-hidden="true">
+                <use href="#i-glass" /></svg></i
+            >+300 ml</button
+          ><button id="customBtn">
+            <i
+              ><svg class="ic" aria-hidden="true">
+                <use href="#i-coffee" /></svg></i
+            >Bebidas</button
+          ><button id="undoBtn">
+            <i
+              ><svg class="ic" aria-hidden="true">
+                <use href="#i-undo" /></svg></i
+            >Deshacer</button
+          ><button id="resetBtn" class="rs">
+            <i
+              ><svg class="ic" aria-hidden="true">
+                <use href="#i-reset" /></svg></i
+            >Reiniciar
+          </button>
+        </div>
+        <div class="banner" id="banner" role="alert">
+          <span id="bannerTxt"></span
+          ><button
+            class="btn o"
+            style="padding: 4px 8px; font-size: 0.75rem"
+            id="moreBtn"
+          >
+            Saber más
+          </button>
+        </div>
+        <section class="card hero">
+          <div class="hb">
+            <svg
+              id="bottle"
+              viewBox="0 0 360 310"
+              role="img"
+              aria-label="Botella que se llena con tu consumo de agua"
+            >
+              <defs>
+                <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1">
+                  <stop id="s1" offset="0" stop-color="#ffffff" />
+                  <stop id="s2" offset="1" stop-color="#e0f2fe" />
+                </linearGradient>
+                <clipPath id="bc">
+                  <path
+                    d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z"
+                  />
+                </clipPath>
+              </defs>
+              <path
+                d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z"
+                fill="rgba(255,255,255,.14)"
+              />
+              <g clip-path="url(#bc)">
+                <g
+                  id="wv"
+                  style="
+                    transform: translateY(284px);
+                    transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+                  "
+                >
+                  <g class="w2">
+                    <path
+                      d="M-60 8Q-45 0-30 8T0 8T30 8T60 8T90 8T120 8T150 8T180 8T210 8T240 8T270 8V330H-60Z"
+                      fill="url(#wg)"
+                      opacity=".55"
+                    />
+                  </g>
+                  <g class="w1">
+                    <path
+                      d="M-60 6Q-45 14-30 6T0 6T30 6T60 6T90 6T120 6T150 6T180 6T210 6T240 6T270 6V330H-60Z"
+                      fill="url(#wg)"
+                    />
+                  </g>
+                </g>
+              </g>
+              <path
+                d="M162 30H198V44C198 56 226 64 230 96V258Q230 284 204 284H156Q130 284 130 258V96C134 64 162 56 162 44Z"
+                fill="none"
+                stroke="#fff"
+                stroke-width="5"
+                stroke-linejoin="round"
+              />
+              <rect x="160" y="6" width="40" height="22" rx="5" fill="#fff" />
+              <g
+                id="mkL"
+                style="
+                  transform: translateY(284px);
+                  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+                "
+              >
+                <line
+                  x1="8"
+                  y1="0"
+                  x2="128"
+                  y2="0"
+                  stroke="#fff"
+                  stroke-opacity=".85"
+                />
+                <text
+                  id="mkLv"
+                  x="8"
+                  y="-8"
+                  fill="#fff"
+                  font-size="26"
+                  font-weight="700"
+                >
+                  0 ml
+                </text>
+                <text
+                  x="8"
+                  y="16"
+                  fill="#fff"
+                  fill-opacity=".8"
+                  font-size="11"
+                  letter-spacing="1"
+                >
+                  CONSUMIDO
+                </text>
+              </g>
+              <g
+                id="mkR"
+                style="
+                  transform: translateY(284px);
+                  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+                "
+              >
+                <line
+                  x1="232"
+                  y1="0"
+                  x2="352"
+                  y2="0"
+                  stroke="#fff"
+                  stroke-opacity=".85"
+                />
+                <text
+                  id="mkRv"
+                  x="352"
+                  y="-8"
+                  text-anchor="end"
+                  fill="#fff"
+                  font-size="26"
+                  font-weight="700"
+                >
+                  0 ml
+                </text>
+                <text
+                  id="mkRt"
+                  x="352"
+                  y="16"
+                  text-anchor="end"
+                  fill="#fff"
+                  fill-opacity=".8"
+                  font-size="11"
+                  letter-spacing="1"
+                >
+                  META A LAS --:--
+                </text>
+              </g>
+            </svg>
+            <div class="pct" id="pct">0 %</div>
+            <div class="vol" id="vol">0 ml</div>
+            <div class="exc" id="exc"></div>
+            <div class="msg" id="msg"></div>
+          </div>
+          <div class="stats">
+            <div>
+              <small>Faltan</small><span><b id="stLeft">–</b> ml</span>
+            </div>
+            <div>
+              <small>Meta</small><span><b id="stGoal">–</b> ml</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card ahora" id="ahora">
+          <h4>Ahora</h4>
+          <div id="ahoraBox"></div>
+        </section>
+        <section class="card ahora" id="hoyCard">
+          <div class="hh2">
+            <h4>Registro de hoy</h4>
+            <button class="lnk" data-go="historial">Ver historial</button>
+          </div>
+          <div id="hoyList"></div>
+        </section>
+        <section class="card teaser" id="teaser" hidden></section>
+      </section>
+      <section id="v-tomas" hidden>
+        <h2 class="vt">Plan de tomas</h2>
+        <div class="card">
+          <div class="tl" id="tl"></div>
+          <p class="note">
+            Las tomas reparten la meta de forma uniforme durante las horas de
+            vigilia. Una toma se marca como cumplida cuando el acumulado alcanza
+            lo previsto hasta ese momento.
+          </p>
+        </div>
+      </section>
+      <section id="v-alarmas" hidden>
+        <h2 class="vt">Alarmas y horarios</h2>
+        <div class="card">
+          <p class="note" id="cnote" hidden>
+            Estás usando un plan personalizado: si cambias tu perfil, la meta se
+            actualiza pero tus tomas no. Pulsa «Restablecer automático» para
+            recalcularlas.
+          </p>
+          <div id="edRows" class="tl"></div>
+          <div class="btns" style="margin-top: 12px">
+            <button class="btn o" id="addSlot">+ Toma</button
+            ><button class="btn o" id="autoSlots">
+              Restablecer automático
+            </button>
+          </div>
+          <div class="fg" style="margin-top: 14px">
+            <label
+              style="
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                text-transform: none;
+                font-size: 0.8rem;
+              "
+              ><input type="checkbox" id="alOn" style="width: auto" /> Alarma
+              con la app abierta (sonido, vibración y aviso)</label
+            >
+          </div>
+          <button class="btn" style="width: 100%; margin-top: 12px" id="icsBtn">
+            Exportar alarmas al calendario (.ics)
+          </button>
+          <p class="note">
+            La alarma en la app solo suena con la página abierta. Para alarmas
+            con el teléfono bloqueado, exporta el .ics e impórtalo en tu
+            calendario (se repite a diario). Si cambias horarios, borra los
+            eventos anteriores y vuelve a exportar. Cada toma tiene su casilla
+            para activar o desactivar su alarma.
+          </p>
+        </div>
+        <div class="card" style="margin-top: 14px">
+          <h2>Consejos de hidratación</h2>
+          <div class="fg">
+            <label for="tipFreq">Frecuencia</label
+            ><select id="tipFreq">
+              <option value="0">Desactivados</option>
+              <option value="3">Pocos (3 al día)</option>
+              <option value="99">Uno entre cada toma</option>
+            </select>
+          </div>
+          <p class="note">
+            Mensajes breves y variados entre tus tomas, solo dentro de tu
+            horario de despertar y dormir y nunca después de la última toma. Con
+            la app abierta aparecen como aviso discreto; en segundo plano, como
+            notificación si diste permiso. Un mismo consejo no se repite hasta
+            haber visto los demás.
+          </p>
+          <label
+            style="
+              display: flex;
+              gap: 8px;
+              align-items: center;
+              margin-top: 12px;
+              text-transform: none;
+              font-size: 0.8rem;
+            "
+            ><input type="checkbox" id="icsTips" style="width: auto" checked />
+            Incluir consejos en el .ics (14 días; vuelve a exportar para
+            renovarlos)</label
+          >
+          <div class="btns" style="margin-top: 12px">
+            <button class="btn o" id="tipTest">Probar un consejo</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 14px">
+          <h2>Sonidos de logro</h2>
+          <label
+            style="
+              display: flex;
+              gap: 8px;
+              align-items: center;
+              text-transform: none;
+              font-size: 0.82rem;
+            "
+            ><input type="checkbox" id="sndOn" style="width: auto" /> Sonar al
+            registrar la primera toma del día y al cumplir la meta</label
+          >
+          <div
+            class="btns"
+            style="margin-top: 12px; justify-content: flex-start"
+          >
+            <button class="btn o" id="sndTest">Escuchar</button>
+          </div>
+          <p class="note">
+            Son sonidos breves generados por la propia app, una vez al día cada
+            uno. Siguen el volumen multimedia del teléfono.
+          </p>
+        </div>
+      </section>
+      <section id="v-perfil" hidden>
+        <h2 class="vt">Perfil y requerimiento</h2>
+        <div class="card" style="margin-bottom: 14px">
+          <div class="idb">
+            <button class="av" id="avBtn" aria-label="Cambiar foto"></button>
+            <div class="fg" style="flex: 1">
+              <label for="nombre">Nombre o seudónimo</label
+              ><input
+                id="nombre"
+                type="text"
+                maxlength="24"
+                autocomplete="nickname"
+                placeholder="¿Cómo quieres que te llamemos?"
+              />
+            </div>
+          </div>
+          <div class="avs" id="avList"></div>
+          <div class="btns" style="justify-content: flex-start">
+            <button class="btn o" id="fotoBtn">📷 Subir foto</button
+            ><button class="btn o" id="fotoRm" hidden>Quitar foto</button>
+          </div>
+          <input type="file" id="fotoIn" accept="image/*" hidden />
+          <p class="note">
+            Tu nombre, avatar y foto se guardan solo en este dispositivo y
+            aparecen en la pantalla principal.
+          </p>
+        </div>
+        <div class="card">
+          <div class="g2">
+            <div class="fg">
+              <label for="sexo">Sexo biológico</label
+              ><select id="sexo">
+                <option value="h">Hombre</option>
+                <option value="m">Mujer</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label for="edad">Edad (años)</label
+              ><input id="edad" type="number" value="30" min="18" max="100" />
+            </div>
+            <div class="fg">
+              <label for="estatura">Estatura (cm)</label
+              ><input
+                id="estatura"
+                type="number"
+                value="175"
+                min="120"
+                max="230"
+              />
+            </div>
+            <div class="fg">
+              <label for="peso">Peso (kg)</label
+              ><input
+                id="peso"
+                type="number"
+                value="94"
+                min="30"
+                max="250"
+                step=".1"
+              />
+            </div>
+            <div class="fg full">
+              <label for="act">Nivel de actividad</label
+              ><select id="act">
+                <option value="1.2">Sedentario (×1.2)</option>
+                <option value="1.375">Ligero, 1–3 d/sem (×1.375)</option>
+                <option value="1.55" selected>
+                  Moderado, 3–5 d/sem (×1.55)
+                </option>
+                <option value="1.725">Intenso, 6–7 d/sem (×1.725)</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label for="clima">Ambiente</label
+              ><select id="clima">
+                <option value="0">Templado</option>
+                <option value="500">Cálido / calor (+500 ml)</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label for="estado">Condición</label
+              ><select id="estado">
+                <option value="0">Ninguna</option>
+                <option value="300">Embarazo (+300 ml)</option>
+                <option value="700">Lactancia (+700 ml)</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label for="desp">Hora de despertar</label
+              ><input id="desp" type="number" value="7" min="0" max="12" />
+            </div>
+            <div class="fg">
+              <label for="dorm">Hora de dormir</label
+              ><input id="dorm" type="number" value="23" min="16" max="24" />
+            </div>
+          </div>
+          <div class="err-msg" id="err"></div>
+          <div class="mp">
+            <div>
+              <h4>BMR</h4>
+              <p id="bmr">–</p>
+            </div>
+            <div>
+              <h4>TDEE</h4>
+              <p id="tdee">–</p>
+            </div>
+            <div>
+              <h4>Meta bebida</h4>
+              <p id="meta">–</p>
+            </div>
+          </div>
+          <p class="note" id="desglose"></p>
+        </div>
+      </section>
+      <section id="v-calorias" hidden>
+        <h2 class="vt">Calorías y gasto</h2>
+        <div class="card cal">
+          <div id="calBox"></div>
+          <p class="note">
+            Información orientativa; no es una prescripción dietética ni
+            sustituye el consejo de un profesional de la salud.
+          </p>
+        </div>
+      </section>
+      <section id="v-base" hidden>
+        <h2 class="vt">Base científica</h2>
+        <div class="card">
+          <ul class="src">
+            <li>
+              <b>Meta de agua total:</b> ingesta adecuada EFSA 2010 de 2,0 L/día
+              (mujeres) y 2,5 L/día (hombres), que incluye el agua de los
+              alimentos; la app asume ~20 % por alimentos y ~80 % por bebidas.
+              Se toma el mayor entre ese valor y 1 ml por kcal de gasto
+              energético (criterio clásico NRC 1989).
+              <a
+                style="color: var(--neon)"
+                href="https://www.efsa.europa.eu/en/press/news/nda100326"
+                target="_blank"
+                rel="noopener"
+                >EFSA</a
+              >
+            </li>
+            <li>
+              <b>BMR:</b> ecuación de Mifflin–St Jeor (Am J Clin Nutr
+              1990;51:241-7): 10·peso + 6,25·estatura − 5·edad + 5 (hombres) o −
+              161 (mujeres).
+            </li>
+            <li>
+              <b>TDEE:</b> BMR × factor de actividad (1,2 a 1,725), estimación
+              convencional.
+            </li>
+            <li>
+              <b>Embarazo/lactancia:</b> +300 ml / +700 ml (valores EFSA 2010).
+            </li>
+            <li>
+              <b>Ritmo máximo:</b> la capacidad renal de excretar agua es de
+              orientativamente 0,8–1 L/h; beber más rápido eleva el riesgo de
+              hiponatremia (consenso de hiponatremia asociada al ejercicio, Clin
+              J Sport Med 2015).
+            </li>
+            <li>
+              <b>Calor (+500 ml):</b> estimación prudente; la necesidad real
+              varía mucho entre personas.
+            </li>
+            <li>
+              <b>Otras bebidas:</b> los valores de EFSA son de agua total
+              (bebidas de todo tipo y humedad de los alimentos, ≈20 % del
+              total). Por eso café, té, jugo, leche y demás bebidas sin alcohol
+              suman el 100 % de su volumen. En el estudio de Maughan et al. (Am
+              J Clin Nutr 2016), café, té y otras bebidas habituales no se
+              diferenciaron del agua en la orina producida (ensayo en hombres
+              jóvenes, un litro por toma). El alcohol se registra pero no suma,
+              y la sopa se registra como alimento.
+            </li>
+          </ul>
+          <p class="note">
+            Herramienta informativa para adultos sanos de 18 años o más. No
+            sustituye el consejo médico; con enfermedad renal, cardíaca,
+            hepática o tratamientos que alteren el equilibrio de líquidos, siga
+            las indicaciones de su médico.
+          </p>
+        </div>
+      </section>
+      <section id="v-libro" hidden><div id="libroBox"></div></section>
+      <section id="v-historial" hidden>
+        <h2 class="vt">Historial</h2>
+        <div id="historialBox"></div>
+      </section>
+      <section id="v-medidas" hidden><div id="medidasBox"></div></section>
+      <section id="v-acerca" hidden>
+        <h2 class="vt">Acerca de</h2>
+        <div class="card">
+          <p class="note" style="font-size: 0.9rem">
+            <b>HidraMetric</b> · v1.7.0<br /><br />Planificador de hidratación
+            que calcula tu meta diaria con referencias de EFSA y la ecuación de
+            Mifflin–St Jeor, reparte las tomas durante el día y te avisa con
+            alarmas. Tus datos se guardan solo en este dispositivo.<br /><br />Herramienta
+            informativa; no sustituye el consejo médico.
+          </p>
+        </div>
+        <div class="card" style="margin-top: 14px">
+          <h2>Tus datos</h2>
+          <p class="note" id="stInfo" style="margin: 0 0 12px">
+            Leyendo el almacenamiento…
+          </p>
+          <div class="btns" style="justify-content: flex-start">
+            <button class="btn o" id="stExp">Exportar copia (.json)</button
+            ><button class="btn o" id="stImp">Importar copia</button>
+          </div>
+          <input type="file" id="stIn" accept="application/json,.json" hidden />
+          <p class="note">
+            El historial se guarda solo en este dispositivo: tomas de los
+            últimos 90 días, resumen diario de 24 meses y resumen mensual sin
+            límite. Si cambias de teléfono o borras los datos del navegador,
+            exporta antes una copia.
+          </p>
+        </div>
+      </section>
+    </main>
+    <noscript
+      ><p style="padding: 16px">HidraMetric necesita JavaScript.</p></noscript
+    >
+    <div class="sheet" id="sheet">
+      <div
+        class="sp"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Registrar bebida"
+      >
+        <div class="sh-top">
+          <h3>Registrar bebida</h3>
+          <button class="ico" id="shX" aria-label="Cerrar">✕</button>
+        </div>
+        <div class="sh-amt"><b id="shAmt">250</b> ml</div>
+        <div class="sh-sub" id="shSub">Agua</div>
+        <div class="chips" id="shTipos"></div>
+        <div class="sh-note" id="shNote" hidden></div>
+        <div class="sh-when">
+          <span>Hoy a las</span><input type="time" id="shTime" />
+        </div>
+        <div class="sh-q">
+          <button data-q="150">150</button><button data-q="250">250</button
+          ><button data-q="330">330</button><button data-q="500">500</button>
+        </div>
+        <div style="text-align: center; margin: -2px 0 8px">
+          <button class="lnk" data-go="medidas">
+            ¿Cuánto es un vaso? Guía de medidas
+          </button>
+        </div>
+        <div class="pad">
+          <button data-k="1">1</button><button data-k="2">2</button
+          ><button data-k="3">3</button><button data-k="4">4</button
+          ><button data-k="5">5</button><button data-k="6">6</button
+          ><button data-k="7">7</button><button data-k="8">8</button
+          ><button data-k="9">9</button><button data-k="00">00</button
+          ><button data-k="0">0</button
+          ><button data-k="<" aria-label="Borrar">⌫</button>
+        </div>
+        <div class="err-msg" id="shErr"></div>
+        <button class="btn" id="shAdd" style="width: 100%; margin-top: 12px">
+          Añadir
+        </button>
+      </div>
+    </div>
+    <div class="toast" id="toast" hidden role="status"></div>
+    <nav class="bot">
+      <button data-go="home" class="act">
+        <i
+          ><svg class="ic" aria-hidden="true"><use href="#i-home" /></svg></i
+        >Home</button
+      ><button data-go="tomas">
+        <i
+          ><svg class="ic" aria-hidden="true"><use href="#i-cal" /></svg></i
+        >Tomas</button
+      ><button data-go="alarmas">
+        <i
+          ><svg class="ic" aria-hidden="true"><use href="#i-alarm" /></svg></i
+        >Alarmas</button
+      ><button data-go="perfil">
+        <i
+          ><svg class="ic" aria-hidden="true"><use href="#i-user" /></svg></i
+        >Perfil</button
+      ><button data-share>
+        <i
+          ><svg class="ic" aria-hidden="true"><use href="#i-share" /></svg></i
+        >Compartir
+      </button>
+    </nav>
+    <div class="ov" id="ov">
+      <div class="mc" role="dialog" aria-modal="true">
+        <h3 id="mt"></h3>
+        <div id="mb"></div>
+        <button class="btn" style="width: 100%" id="mx">Entendido</button>
+      </div>
+    </div>
+
+    <script src="js/intro.js" defer></script>
+    <script src="js/sonido.js" defer></script>
+    <script src="js/almacen.js" defer></script>
+    <script src="js/app.js" defer></script>
+    <script src="js/libro.js" defer></script>
+    <script src="js/avisos.js" defer></script>
+    <script src="js/bebidas.js" defer></script>
+    <script src="js/identidad.js" defer></script>
+    <script src="js/clima.js" defer></script>
+    <script src="js/medidas.js" defer></script>
+    <script src="js/historial.js" defer></script>
+    <script src="js/datos.js" defer></script>
+  </body>
+</html>
