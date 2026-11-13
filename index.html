@@ -22,11 +22,17 @@
   <title>HidraMetric · Planificador de hidratación basado en evidencia</title>
 
   <!-- Garantiza fondo #0284c7 instantáneo antes de cargar styles.css -->
-  <style>
-    html, body, .splash {
-      background-color: #0284c7;
-    }
-  </style>
+ <style>
+  /* Fuerza el color azul corporativo en html, body y splash desde el milisegundo cero */
+  html, body {
+    background-color: #0284c7 !important;
+    margin: 0;
+    padding: 0;
+  }
+  .splash {
+    background-color: #0284c7 !important;
+  }
+</style>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
