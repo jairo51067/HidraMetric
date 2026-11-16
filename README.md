@@ -37,6 +37,9 @@ En Vercel: **Add New → Project →** importar el repositorio. *Framework Prese
 - **Android (Chrome):** menú lateral → *Instalar app*.
 - **iPhone (Safari):** Compartir → *Añadir a pantalla de inicio*.
 
+## Tema claro/oscuro automático
+`js/tema.js` (cargado en `<head>` para evitar parpadeo) calcula el amanecer y el atardecer en el propio dispositivo con la ecuación del amanecer; usa la ubicación del clima si se activó y, si no, el horario estándar de 6:00 a 18:00. El botón de la barra superior cambia el tema hasta el próximo amanecer o atardecer; en **Perfil → Apariencia** se fija Automático, Claro u Oscuro de forma permanente. Detalles y pruebas: [`docs/apariencia.md`](docs/apariencia.md).
+
 ## Historial, sonidos y presentación
 - **Historial** (`js/historial.js`): una sola tubería lee solo el periodo visible del almacén (`ALM.dia`, `ALM.tomasDe`, `ALM.semana`, `ALM.mes`) y lo dibuja en cinco secciones fijas: selector de periodo, resumen, gráfico, desglose por bebida y detalle. Se abre desde el menú lateral o desde «Registro de hoy».
 - **Sonidos** (`js/sonido.js`): generados con Web Audio; primera toma del día y meta cumplida, una vez al día cada uno (las banderas se guardan con el día). Interruptor en Alarmas.

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.8.0 — 2026-11-04
+- **Tema automático**: claro desde el amanecer y oscuro desde el atardecer, calculados en el dispositivo (con la ubicación del clima si está activa; si no, de 6:00 a 18:00). El botón de la barra superior cambia el tema hasta el próximo amanecer o atardecer; en Perfil → Apariencia se puede fijar Automático, Claro u Oscuro. El tema se aplica antes del primer dibujo, sin parpadeo.
+- **Legibilidad y espaciado** (auditoría de 18 pantallas y ventanas emergentes, en 320, 360, 390 y 430 px, tema claro y oscuro): letras de al menos 11 px, contraste WCAG AA en botones, etiquetas, insignias y textos sobre degradados, separación entre recuadros de Inicio y títulos de Perfil, áreas táctiles mayores, barra superior sin apretarse en 320 px, editor de horarios con la hora completa (a. m./p. m.) y sin desbordar la página, y corrección de un choque de estilos entre las fichas de bebida y las etiquetas del historial.
+
 ## 1.7.0 — 2026-10-31
 - Corregido: el sprite de iconos (invisible) ocupaba 130 × 250 px en la esquina superior izquierda por una regla de estilos antigua y podía capturar toques desde la v1.5.0; ahora mide 0 × 0 y no recibe eventos.
 - Pantalla de **Historial** (menú lateral y enlace en «Registro de hoy»): día, semana y mes sobre las consultas del almacén, con resumen, gráfico (anillo, barras con meta y calendario de cumplimiento), desglose por bebida y detalle.
